@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>StudySphere</title>
+</head>
+
+<body class="h-screen flex bg-gray-100">
+    <header class="w-64 bg-white shadow-md p-6 flex flex-col">
+        <img src="../assets/icons/logo.png" alt="StudySphere logo" />
+
+        <nav class="flex flex-col h-screen">
+            <a href="homepage.html"
+                class="flex items-center gap-2 my-2 px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md">
+                <img src="../assets/icons/home.svg" alt="home icon" class="w-5 h-5" />
+                <span>Homepage</span>
+            </a>
+
+            <a href="explore.html"
+                class="flex items-center gap-2 my-2 px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md">
+                <img src="../assets/icons/explore.svg" alt="explore icon" class="w-5 h-5" />
+                <span>Explore Tests</span>
+            </a>
+
+            <a href="leaderboard.html"
+                class="flex items-center gap-2 my-2 px-4 py-2 bg-indigo-100 text-indigo-700 font-semibold rounded-md">
+                <img src="../assets/icons/leaderboard.svg" alt="leaderboard icon" class="w-5 h-5" />
+                <span>Leaderboards</span>
+            </a>
+
+            <hr class="my-2" />
+
+            <a href="myCourses.html"
+                class="flex items-center gap-2 my-2 px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md">
+                <img src="../assets/icons/course.svg" alt="course icon" class="w-5 h-5" />
+                <span>My Courses</span>
+            </a>
+
+            <a href="profile.html"
+                class="flex items-center gap-2 my-2 px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md">
+                <img src="../assets/icons/profile.svg" alt="profile icon" class="w-5 h-5" />
+                <span>Profile</span>
+            </a>
+        </nav>
+    </header>
+
+    <main class="flex-1 p-6 z-10 overflow-auto">
+        <div class="flex justify-between items-start">
+            <h2 class="text-3xl font-semibold text-gray-800">Leaderboards</h2>
+            <div class="w-12 h-12 bg-gray-300 rounded-full"></div>
+        </div>
+
+        <!-- Leagues Section -->
+        <div class="mt-8 flex justify-center gap-12">
+            <div class="flex flex-col items-center">
+                <div class="w-24 h-24 bg-gray-400 rounded-full flex items-center justify-center">
+                    <span class="text-white text-2xl">1</span>
+                </div>
+                <span class="mt-2 text-sm text-gray-600">League 1</span>
+            </div>
+            <div class="flex flex-col items-center">
+                <div class="w-24 h-24 bg-gray-400 rounded-full flex items-center justify-center">
+                    <span class="text-white text-2xl">2</span>
+                </div>
+                <span class="mt-2 text-sm text-gray-600">League 2</span>
+            </div>
+            <div class="flex flex-col items-center">
+                <div class="w-36 h-36 bg-indigo-500 rounded-full flex items-center justify-center">
+                    <span class="text-white text-3xl font-semibold">3</span>
+                </div>
+                <span class="mt-2 text-sm text-gray-600">League 3</span>
+            </div>
+            <div class="flex flex-col items-center">
+                <div class="w-24 h-24 bg-gray-400 rounded-full flex items-center justify-center">
+                    <span class="text-white text-2xl">4</span>
+                </div>
+                <span class="mt-2 text-sm text-gray-600">League 4</span>
+            </div>
+            <div class="flex flex-col items-center">
+                <div class="w-24 h-24 bg-gray-400 rounded-full flex items-center justify-center">
+                    <span class="text-white text-2xl">5</span>
+                </div>
+                <span class="mt-2 text-sm text-gray-600">League 5</span>
+            </div>
+        </div>
+
+        <!-- Gold League Section -->
+        <div class="mt-6 text-center">
+            <h3 class="font-bold text-xl">Gold League</h3>
+            <p class="mt-2 text-gray-600">Be on top six to be promoted to the next league.</p>
+            <p class="mt-2 text-gray-600">Study to earn more EXP.</p>
+
+            <!-- Weekly / Overall Toggle -->
+            <div class="mt-6">
+                <button class="px-6 py-2 bg-indigo-500 text-white rounded-lg hover:bg-indigo-600 focus:outline-none"
+                    id="weeklyBtn">Weekly</button>
+                <button class="ml-4 px-6 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-indigo-600 focus:outline-none"
+                    id="overallBtn">Overall</button>
+            </div>
+        </div>
+
+        <!-- Leaderboard Content -->
+        <div id="weeklyLeaderboard" class="mt-6">
+            <h4 class="text-lg font-semibold mb-4">Weekly Leaderboard <span id="rank"></span></h4> <!--Get the rank-->
+        </div>
+        
+        <div id="overallLeaderboard" class="mt-6 hidden">
+            <h4 class="text-lg font-semibold mb-4">Overall Leaderboard</h4>
+        
+        </div>
+
+    </main>
+
+    <script>
+        const weeklyBtn = document.getElementById('weeklyBtn');
+        const overallBtn = document.getElementById('overallBtn');
+        const weeklyLeaderboard = document.getElementById('weeklyLeaderboard');
+        const overallLeaderboard = document.getElementById('overallLeaderboard');
+
+        weeklyBtn.addEventListener('click', () => {
+            weeklyBtn.classList.add('bg-indigo-500', 'text-white');
+            weeklyBtn.classList.remove('bg-gray-200', 'text-gray-700');
+            overallBtn.classList.add('bg-gray-200', 'text-gray-700');
+            overallBtn.classList.remove('bg-indigo-500', 'text-white');
+
+            weeklyLeaderboard.classList.remove('hidden');
+            overallLeaderboard.classList.add('hidden');
+        });
+
+        overallBtn.addEventListener('click', () => {
+            overallBtn.classList.add('bg-indigo-500', 'text-white');
+            overallBtn.classList.remove('bg-gray-200', 'text-gray-700');
+            weeklyBtn.classList.add('bg-gray-200', 'text-gray-700');
+            weeklyBtn.classList.remove('bg-indigo-500', 'text-white');
+
+            weeklyLeaderboard.classList.add('hidden');
+            overallLeaderboard.classList.remove('hidden');
+        });
+    </script>
+</body>
+
+</html>

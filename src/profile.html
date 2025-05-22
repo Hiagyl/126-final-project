@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="profile.js" defer></script>
+
+    <title>StudySphere</title>
+</head>
+
+<body class="h-screen flex bg-gray-100">
+    <!-- Sidebar -->
+    <header class="w-64 bg-white shadow-md p-6 flex flex-col">
+        <img src="../assets/icons/logo.png" alt="StudySphere logo" />
+        <nav class="flex flex-col h-screen">
+            <a href="homepage.html"
+                class="flex items-center gap-2 my-2 px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md">
+                <img src="../assets/icons/home.svg" alt="home icon" class="w-5 h-5" />
+                <span>Homepage</span>
+            </a>
+            <a href="explore.html"
+                class="flex items-center gap-2 my-2 px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md">
+                <img src="../assets/icons/explore.svg" alt="explore icon" class="w-5 h-5" />
+                <span>Explore Tests</span>
+            </a>
+            <a href="leaderboard.html"
+                class="flex items-center gap-2 my-2 px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md">
+                <img src="../assets/icons/leaderboard.svg" alt="leaderboard icon" class="w-5 h-5" />
+                <span>Leaderboards</span>
+            </a>
+            <hr class="my-2" />
+            <a href="myCourses.html"
+                class="flex items-center gap-2 my-2 px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md">
+                <img src="../assets/icons/course.svg" alt="course icon" class="w-5 h-5" />
+                <span>My Courses</span>
+            </a>
+            <a href="profile.html"
+                class="flex items-center gap-2 my-2 px-4 py-2 bg-indigo-100 text-indigo-700 font-semibold rounded-md">
+                <img src="../assets/icons/profile.svg" alt="profile icon" class="w-5 h-5" />
+                <span>Profile</span>
+            </a>
+        </nav>
+    </header>
+
+    <main class="flex-1 p-6 z-10">
+        <h2 class="text-3xl font-semibold text-gray-800 mb-6">Profile</h2>
+
+        <div class="bg-white rounded-lg shadow-md p-6 flex items-start gap-6 mb-8">
+            <div
+                class="w-40 h-40 bg-gray-300 rounded-full flex-shrink-0 flex items-center justify-center text-gray-500 text-3xl">
+                IMG
+            </div>
+            <div class="flex-1 h-40 flex flex-col justify-between">
+                <p class="text-lg text-gray-700"><span class="font-semibold">Username:</span> <span id="username"></span></p>
+                <p class="text-lg text-gray-700"><span class="font-semibold">College:</span> <span id="college"></span></p>
+                <p class="text-lg text-gray-700"><span class="font-semibold">Year Level:</span> <span id="year_level"></span></p>
+                <p class="text-lg text-gray-700"><span class="font-semibold">Academic Org:</span> <span id="acad_org"></span></p>
+            </div>
+            <button class="text-gray-500 hover:text-gray-700">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M11 5H6a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2v-5M18.5 2.5a2.121 2.121 0 113 3L12 15l-4 1 1-4 9.5-9.5z" />
+                </svg>
+            </button>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+            <div class="flex items-center bg-white shadow-md rounded-lg p-4">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-orange-500 mr-4" fill="none"
+                    viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M12 3v2m0 14v2m9-9h-2M5 12H3m15.364-6.364l-1.414 1.414M6.05 17.95l-1.414 1.414m0-13.828l1.414 1.414M17.95 17.95l1.414 1.414M12 8a4 4 0 100 8 4 4 0 000-8z" />
+                </svg>
+                <div>
+                    <p class="text-xl font-bold text-gray-800" id="streak">...</p>
+                    <p class="text-sm text-gray-600">Day Streak</p>
+                </div>
+            </div>
+
+            <div class="flex items-center bg-white shadow-md rounded-lg p-4">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-yellow-500 mr-4" fill="none"
+                    viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.974a1 1 0 00.95.69h4.18c.969 0 1.371 1.24.588 1.81l-3.39 2.462a1 1 0 00-.364 1.118l1.286 3.974c.3.921-.755 1.688-1.54 1.118L12 15.347l-3.39 2.462c-.784.57-1.838-.197-1.539-1.118l1.285-3.974a1 1 0 00-.364-1.118L4.602 9.401c-.783-.57-.38-1.81.588-1.81h4.18a1 1 0 00.95-.69l1.286-3.974z" />
+                </svg>
+                <div>
+                    <p class="text-xl font-bold text-gray-800" id="exp">...</p>
+                    <p class="text-sm text-gray-600">Experience</p>
+                </div>
+            </div>
+
+            <div class="flex items-center bg-white shadow-md rounded-lg p-4">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-blue-500 mr-4" fill="none"
+                    viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M12 2L2 7v6c0 5.523 3.582 10.252 9 12 5.418-1.748 9-6.477 9-12V7l-10-5z" />
+                </svg>
+                <div>
+                    <p class="text-xl font-bold text-gray-800" id="current_league">...</p>
+                    <p class="text-sm text-gray-600">Current League</p>
+                </div>
+            </div>
+
+            <div class="flex items-center bg-white shadow-md rounded-lg p-4">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-indigo-500 mr-4" fill="none"
+                    viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M8 21l4-2 4 2v-4l3-3-4.2-.6L12 9l-2.8 4.4L5 14l3 3v4z" />
+                </svg>
+                <div>
+                    <p class="text-xl font-bold text-gray-800" id="highest_league">...</p>
+                    <p class="text-sm text-gray-600">Highest Rank</p>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>

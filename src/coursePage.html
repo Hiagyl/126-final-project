@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="coursePage.js" defer></script>
+    <title>Course Page</title>
+</head>
+
+<body class="h-screen flex bg-gray-100">
+    <header class="w-64 bg-white shadow-md p-6 flex flex-col">
+        <img src="../assets/icons/logo.png" alt="StudySphere logo" />
+
+        <nav class="flex flex-col h-screen">
+            <a href="homepage.html"
+                class="flex items-center gap-2 my-2 px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md">
+                <img src="../assets/icons/home.svg" alt="home icon" class="w-5 h-5" />
+                <span>Homepage</span>
+            </a>
+
+            <a href="explore.html"
+                class="flex items-center gap-2 my-2 px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md">
+                <img src="../assets/icons/explore.svg" alt="explore icon" class="w-5 h-5" />
+                <span>Explore Tests</span>
+            </a>
+
+            <a href="leaderboard.html"
+                class="flex items-center gap-2 my-2 px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md">
+                <img src="../assets/icons/leaderboard.svg" alt="leaderboard icon" class="w-5 h-5" />
+                <span>Leaderboards</span>
+            </a>
+
+            <hr class="my-2" />
+
+            <a href="myCourses.html"
+                class="flex items-center gap-2 my-2 px-4 py-2 bg-indigo-100 text-indigo-700 font-semibold rounded-md">
+                <img src="../assets/icons/home.svg" alt="home icon" class="w-5 h-5" />
+                <span>My Courses</span>
+            </a>
+
+            <a href="profile.html"
+                class="flex items-center gap-2 my-2 px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md">
+                <img src="../assets/icons/profile.svg" alt="profile icon" class="w-5 h-5" />
+                <span>Profile</span>
+            </a>
+        </nav>
+    </header>
+
+    <main class="flex-1 p-6">
+        <!-- Back Button -->
+        <button id="backBtn" class="flex items-center gap-2 text-indigo-600 hover:text-indigo-800 mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+            Back
+        </button>
+
+        <div class="flex items-center justify-between mb-2">
+
+            <div id="courseTitle" class="text-3xl font-semibold text-gray-800">Loading...</div>
+     
+            <div class="flex gap-2">
+                <button
+                    onclick="window.location.href='test.php'"
+                    class="bg-green-500 text-white px-4 py-2 rounded-full hover:bg-green-600">Test</button>
+                <button
+                    onclick="window.location.href='learnFlashcards.php'"
+                    class="bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-600">Learn</button>
+            </div>
+       
+            
+        </div>
+        
+        <hr class="mb-6 border-gray-300" />
+
+
+        
+            <div id="flashcardContainer" class="mt-4 flex flex-col gap-4">
+              
+            </div>
+
+            <button id="openFlashcardModalBtn" class="bg-indigo-600 text-white px-4 py-2 rounded-full mt-6 w-full">Add
+                Flashcard</button>
+        </div>
+    </main>
+
+   
+    <div id="flashcardModalBackdrop" class="fixed inset-0 bg-black/50 hidden flex justify-center items-center z-30">
+        <form method="POST" action="add_flashcard.php" class="bg-white rounded-lg shadow-xl w-full max-w-md relative p-6">
+            <button id="closeFlashcardModalBtn"
+                class="absolute top-2 right-3 text-gray-500 hover:text-gray-700 text-xl">&times;</button>
+            <h2 class="text-2xl font-semibold mb-4">Add Flashcard</h2>
+            <input type="text" name="flashcardQuestion"placeholder="Question"
+                class="w-full px-4 py-2 border rounded focus:outline-none mb-4" />
+            <input type="text" name="flashcardAnswer" placeholder="Answer"
+                class="w-full px-4 py-2 border rounded focus:outline-none" />
+            <div class="mt-6 flex justify-end gap-2">
+                <button id="cancelFlashcardModalBtn"
+                    class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400">Cancel</button>
+                <button id="saveFlashcardBtn"
+                    class="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700">Save</button>
+            </div>
+        </form>
+    </div>
+
+    <div id="flashcardModalBackdrop2" class="fixed inset-0 bg-black/50 hidden flex justify-center items-center z-30">
+        <form method="POST" action="edit_flashcard.php" class="bg-white rounded-lg shadow-xl w-full max-w-md relative p-6">
+            <button id="closeFlashcardModalBtn2"
+                class="absolute top-2 right-3 text-gray-500 hover:text-gray-700 text-xl">&times;</button>
+            <h2 class="text-2xl font-semibold mb-4">Edit Flashcard</h2>
+            <input type="hidden" id="flashcardID" name="flashcard_id">
+            <input type="text" id="flashcardQuestion" name="flashcardQuestion" placeholder="Question"
+                class="w-full px-4 py-2 border rounded focus:outline-none mb-4" />
+            <input type="text" id="flashcardAnswer" name="flashcardAnswer" placeholder="Answer"
+                class="w-full px-4 py-2 border rounded focus:outline-none" />
+            <div class="mt-6 flex justify-end gap-2">
+                <button id="cancelFlashcardModalBtn2" class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400">Cancel</button>
+                <button id="saveFlashcardBtn"
+                    class="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700">Save</button>
+            </div>
+        </form>
+    </div>
+    <script>
+     
+        document.getElementById("backBtn").addEventListener("click", () => {
+            window.history.back();
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,123 @@
+<!-- myCourses.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="myCourses.js" defer></script>
+    <title>My Courses</title>
+</head>
+
+<body class="h-screen flex bg-gray-100">
+    <header class="w-64 bg-white shadow-md p-6 flex flex-col">
+        <img src="../assets/icons/logo.png" alt="StudySphere logo" />
+        <nav class="flex flex-col h-screen">
+            <a href="homepage.html"
+                class="flex items-center gap-2 my-2 px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md">
+                <img src="../assets/icons/home.svg" alt="home icon" class="w-5 h-5" />
+                <span>Homepage</span>
+            </a>
+            <a href="explore.html"
+                class="flex items-center gap-2 my-2 px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md">
+                <img src="../assets/icons/explore.svg" alt="explore icon" class="w-5 h-5" />
+                <span>Explore Tests</span>
+            </a>
+            <a href="leaderboard.html"
+                class="flex items-center gap-2 my-2 px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md">
+                <img src="../assets/icons/leaderboard.svg" alt="leaderboard icon" class="w-5 h-5" />
+                <span>Leaderboards</span>
+            </a>
+            <hr class="my-2" />
+            <a href="myCourses.html"
+                class="flex items-center gap-2 my-2 px-4 py-2 bg-indigo-100 text-indigo-700 font-semibold rounded-md">
+                <img src="../assets/icons/home.svg" alt="home icon" class="w-5 h-5" />
+                <span>My Courses</span>
+            </a>
+            <a href="profile.html"
+                class="flex items-center gap-2 my-2 px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md">
+                <img src="../assets/icons/profile.svg" alt="profile icon" class="w-5 h-5" />
+                <span>Profile</span>
+            </a>
+        </nav>
+    </header>
+
+    <main class="flex-1 p-6">
+        <div class="flex justify-between items-start">
+            <h2 class="text-3xl font-semibold text-gray-800">My Courses</h2>
+            <div class="w-12 h-12 bg-gray-300 rounded-full"></div>
+        </div>
+
+        <div class="mt-6 flex justify-between items-center gap-4 flex-wrap">
+            <div class="flex items-center bg-white border border-gray-300 rounded-md px-3 py-2 w-full sm:w-1/2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500 mr-2" fill="none"
+                    viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M21 21l-4.35-4.35M10.5 18a7.5 7.5 0 100-15 7.5 7.5 0 000 15z" />
+                </svg>
+                <input type="text" placeholder="Search" class="outline-none w-full" />
+            </div>
+            <button id="openModalBtn"
+                class="flex items-center gap-2 content-center bg-indigo-600 text-white px-4 py-2 rounded-full hover:bg-indigo-700 whitespace-nowrap">
+                <img src="../assets/icons/plus.svg" alt="plus icon" class="w-5 h-5" />
+                Add Course Folder
+            </button>
+        </div>
+
+        <div id="courseContainer" class="flex flex-wrap gap-6 mt-6"></div>
+    </main>
+
+    <div id="modalBackdrop" class="fixed inset-0 bg-black/50 hidden flex justify-center items-center z-30">
+        <form action="add_course.php" method="POST" class="bg-white rounded-lg shadow-xl w-full max-w-md relative p-6">
+            <button type="button" id="closeModalBtn"
+                class="absolute top-2 right-3 text-gray-500 hover:text-gray-700 text-xl">&times;</button>
+    
+            <h2 class="text-2xl font-semibold mb-4" id="modalTitle">Add Course</h2>
+    
+            <div class="space-y-4">
+                <input type="text" name="courseName" placeholder="Course Name" required
+                    class="w-full px-4 py-2 border rounded focus:outline-none" />
+                <textarea name="courseDesc" placeholder="Course Description" rows="4"
+                    class="w-full px-4 py-2 border rounded focus:outline-none resize-none"></textarea>
+            </div>
+    
+            <div class="mt-6 flex justify-end gap-2">
+                <button type="button" id="cancelModalBtn" class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400">
+                    Cancel
+                </button>
+                <button type="submit" class="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700">
+                    Save
+                </button>
+            </div>
+        </form>
+    </div>
+    
+    <div id="modalBackdrop2" class="fixed inset-0 bg-black/50 hidden flex justify-center items-center z-30">
+        <form action="edit_course.php" method="POST" class="bg-white rounded-lg shadow-xl w-full max-w-md relative p-6">
+            <button type="button" id="closeModalBtn2"
+                class="absolute top-2 right-3 text-gray-500 hover:text-gray-700 text-xl">&times;</button>
+    
+            <h2 class="text-2xl font-semibold mb-4" id="modalTitle">Edit Course</h2>
+    
+            <div class="space-y-4">
+                <input type="hidden" id="courseID" name="course_id">
+                <input type="text" id="courseName" name="courseName" placeholder="Course Name" required
+                    class="w-full px-4 py-2 border rounded focus:outline-none" />
+                <textarea id="courseDesc" name="courseDesc" placeholder="Course Description" rows="4"
+                    class="w-full px-4 py-2 border rounded focus:outline-none resize-none"></textarea>
+            </div>
+    
+            <div class="mt-6 flex justify-end gap-2">
+                <button type="button" id="cancelModalBtn2" class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400">
+                    Cancel
+                </button>
+                <button type="submit" class="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700">
+                    Save
+                </button>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>
