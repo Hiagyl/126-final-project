@@ -2,6 +2,11 @@ console.log("profile.js loaded");
 
 document.addEventListener("DOMContentLoaded", function () {
     console.log("DOM fully loaded");
+    const openBtn = document.getElementById('openEditProfileModalBtn');
+    const modal = document.getElementById('editProfileModalBackDrop');
+    const closeBtn = document.getElementById('closeEditProfileModalBtn');
+    const cancelBtn = document.getElementById('cancelEditProfileModalBtn');
+
 
     fetch("sessionData.php")
         .then(response => {
@@ -25,4 +30,17 @@ document.addEventListener("DOMContentLoaded", function () {
             alert("You are not logged in. Please log in again.");
             window.location.href = "login.php";
         });
+
+    openBtn.addEventListener("click", () => {
+        modal.classList.remove("hidden");
+
+    });
+
+    closeBtn.addEventListener("click", () => {
+        modal.classList.add("hidden");
+    });
+
+    cancelBtn.addEventListener("click", () => {
+        modal.classList.add("hidden");
+    });
 });

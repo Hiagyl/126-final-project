@@ -58,7 +58,7 @@
                 <p class="text-lg text-gray-700"><span class="font-semibold">Year Level:</span> <span id="year_level"></span></p>
                 <p class="text-lg text-gray-700"><span class="font-semibold">Academic Org:</span> <span id="acad_org"></span></p>
             </div>
-            <button class="text-gray-500 hover:text-gray-700">
+            <button id="openEditProfileModalBtn" class="text-gray-500 hover:text-gray-700">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -117,6 +117,46 @@
             </div>
         </div>
     </main>
+    <div id="editProfileModalBackDrop" class="fixed inset-0 bg-black/50 hidden flex justify-center items-center z-30">
+        <form method="POST" action="profile_edit.php" class="bg-white rounded-lg shadow-xl w-full max-w-xl relative p-6">
+            <button id="closeEditProfileModalBtn"
+                    class="absolute top-2 right-3 text-gray-500 hover:text-gray-700 text-xl">&times;</button>
+            <h2 class="text-2xl font-semibold mb-4">Edit Profile</h2>
+            <div class="flex justify-center items-center">
+                <div class="relative">
+                    <!-- Circle -->
+                    <div class="w-40 h-40 bg-gray-300 rounded-full flex items-center justify-center text-gray-500 text-3xl">
+                        IMG
+                    </div>
+                    <!-- Plus-circle button -->
+                    <button class="absolute bottom-1 right-3 bg-blue-500 text-white rounded-full p-1.5 shadow hover:bg-blue-600">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-800">Name</h3>
+            <input type="text" name="editProfileName" placeholder="Change Name"
+                   class="w-full px-4 py-2 border rounded focus:outline-none mb-4" />
+            <h3 class="text-xl font-semibold text-gray-800">College</h3>
+            <input type="text" name="editCollege" placeholder="Current College"
+                   class="w-full px-4 py-2 border rounded focus:outline-none" />
+            <h3 class="text-xl font-semibold text-gray-800">Year Level</h3>
+            <input type="text" name="editYearLevel" placeholder="Current Year Level"
+                   class="w-full px-4 py-2 border rounded focus:outline-none" />
+            <h3 class="text-xl font-semibold text-gray-800">Academic Organization</h3>
+            <input type="text" name="editAcadOrg" placeholder="Current Academic Organization"
+                   class="w-full px-4 py-2 border rounded focus:outline-none" />
+
+            <div class="mt-12 flex justify-end gap-2">
+                <button id="cancelEditProfileModalBtn"
+                        class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400">Cancel</button>
+                <button id="saveFlashcardBtn"
+                        class="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700">Save</button>
+            </div>
+        </form>
+    </div>
 </body>
 
 </html>
