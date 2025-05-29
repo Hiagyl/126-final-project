@@ -84,6 +84,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 return;
             }
 
+            if (data.length === 0) {
+                setContainer.innerHTML = `<p class="text-gray-800 text-center w-full">No Flashcards.</p>`;
+                return;
+            }
             fetch("get_current_user.php")
                 .then(res => res.json())
                 .then(userData => {

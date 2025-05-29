@@ -69,27 +69,26 @@ document.addEventListener("DOMContentLoaded", function () {
                 card.href = `insideCourse.html?course_id=${course.course_id}`;
                 card.className = "block w-full sm:w-[calc(50%-1rem)] bg-white shadow-md rounded-lg p-4 hover:bg-gray-100 transition";
                 card.innerHTML = `
-            <div class="flex justify-between items-start">
-                <h3 class="text-xl font-semibold text-gray-800 max-w-[90%] break-words whitespace-pre-wrap">${course.course_name}</h3>
-                <div class="relative">
-                    <button class="dotsBtn text-2xl p-1 rounded hover:bg-gray-200">&#x22EE;</button>
-                    <div class="modalMenu hidden absolute right-0 mt-2 w-40 bg-white border rounded shadow-lg z-10">
-                    <button class="editBtn w-full text-left px-4 py-2 hover:bg-gray-100">Edit</button>
-                    <form onsubmit=\"return confirm('Are you sure you want to delete this course?');\" action='delete_course.php'  method='post'>
-                    <input type='text' style='display:none' name='course_id' value='${course.course_id}'>
-                    <button type='submit' class='w-full text-left px-4 py-2 hover:bg-gray-100'>Delete</button>
-                    </form>
+                <div class="flex justify-between items-start">
+                    <h3 class="text-xl font-semibold text-gray-800 max-w-[90%] break-words whitespace-pre-wrap">${course.course_name}</h3>
+                    <div class="relative">
+                        <button class="dotsBtn text-2xl p-1 rounded hover:bg-gray-200">&#x22EE;</button>
+                        <div class="modalMenu hidden absolute right-0 mt-2 w-40 bg-white border rounded shadow-lg z-10">
+                            <button class="editBtn w-full text-left px-4 py-2 hover:bg-gray-100">Edit</button>
+                            <form onsubmit="return confirm('Are you sure you want to delete this course?');" action='delete_course.php' method='post'>
+                                <input type='text' style='display:none' name='course_id' value='${course.course_id}'>
+                                <button type='submit' class='w-full text-left px-4 py-2 hover:bg-gray-100'>Delete</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <p class="mt-2 text-gray-600 break-words whitespace-pre-wrap">${course.course_description}</p>
-        `;
+                <p class="mt-2 text-gray-600 break-words whitespace-pre-wrap">${course.course_description}</p>
+            `;
                 courseContainer.appendChild(card);
 
                 const dotsBtn = card.querySelector(".dotsBtn");
                 const modalMenu = card.querySelector(".modalMenu");
                 const editBtn = card.querySelector(".editBtn");
-                // const deleteBtn = card.querySelector(".deleteBtn");
 
                 dotsBtn.addEventListener("click", (e) => {
                     e.preventDefault();
@@ -99,7 +98,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     });
                     modalMenu.classList.toggle("hidden");
                 });
-                
 
                 editBtn.addEventListener("click", (e) => {
                     e.preventDefault();
@@ -108,7 +106,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     courseIdInput.value = course.course_id;
                     courseNameInput.value = course.course_name;
                     courseDescInput.value = course.course_description;
-                    // modalTitle.textContent = "Edit Course";
                     editModal.classList.remove("hidden");
                 });
 
@@ -125,6 +122,7 @@ document.addEventListener("DOMContentLoaded", function () {
             courseContainer.innerHTML = `<p class="text-red-500">Failed to load courses.</p>`;
             console.error(err);
         });
+
     
     document.addEventListener("click", (e) => {
         const isDotsBtn = e.target.closest(".dotsBtn");
