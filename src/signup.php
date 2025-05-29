@@ -10,10 +10,11 @@
   <div class="flex max-w-4xl bg-white shadow-lg rounded-lg overflow-hidden">
 
     <!-- Left side: Logo placeholder -->
-    <div class="hidden md:flex w-1/2 bg-green-600 items-center justify-center">
-      <div class="text-white text-4xl font-bold">
+    <div class="hidden md:flex w-1/2 bg-white items-center justify-center">
+      <!-- <div class="text-white text-4xl font-bold">
         StudySphere
-      </div>
+      </div> -->
+      <img src="../assets/images/logo.png" alt="StudySphere logo" class="mb-8" />
     </div>
 
     <!-- Right side: Sign Up form -->

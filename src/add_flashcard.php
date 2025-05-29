@@ -11,14 +11,17 @@ $setID = $_SESSION['current_set_id'];
 $question = $_POST['flashcardQuestion'];
 $answer = $_POST['flashcardAnswer'];
 
-$sql = "INSERT INTO flashcards (set_id, question, answer) VALUES ($setID, '$question', '$answer')";
+// Use prepared statement to handle special characters like apostrophes
+$stmt = $conn->prepare("INSERT INTO flashcards (set_id, question, answer) VALUES (?, ?, ?)");
+$stmt->bind_param("iss", $setID, $question, $answer);
 
-if ($conn->query($sql) === TRUE) {
-    header("Location: coursePage.html");
+if ($stmt->execute()) {
+    header("Location: coursePage.html?set_id=$setID");
     exit();
 } else {
-    echo "Error: " . $conn->error;
+    echo "Error: " . $stmt->error;
 }
 
+$stmt->close();
 $conn->close();
 ?>

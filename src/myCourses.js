@@ -11,6 +11,29 @@ document.addEventListener("DOMContentLoaded", function () {
     const courseDescInput = document.getElementById("courseDesc");
     const courseIdInput = document.getElementById("courseID");
     // const modalTitle = document.getElementById("modalTitle");
+    const alertModal = document.getElementById("alertModal");
+    const alertContent = document.getElementById("alertContent");
+    const urlParams = new URLSearchParams(window.location.search);
+    const alertType = urlParams.get('alert');
+    const alertMsg = urlParams.get('msg');
+
+    if (alertType && alertMsg) {
+        const decodedMsg = decodeURIComponent(alertMsg);
+        alertContent.textContent = decodedMsg;
+
+        if (alertType === 'success') {
+            alertContent.classList.add("bg-green-100", "text-green-800", "border-green-300");
+        } else {
+            alertContent.classList.add("bg-red-100", "text-red-800", "border-red-300");
+        }
+
+        alertModal.classList.remove("hidden");
+
+        setTimeout(() => {
+            alertModal.classList.add("hidden");
+            alertContent.className = "bg-white px-6 py-4 rounded-lg shadow-lg text-sm font-medium text-center max-w-sm w-full border";
+        }, 3000);
+    }
 
     openBtn.addEventListener("click", () => {
         modal.classList.remove("hidden");
@@ -32,6 +55,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
+    
     fetch("get_courses.php")
         .then(response => response.json())
         .then(data => {
@@ -46,10 +70,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 card.className = "block w-full sm:w-[calc(50%-1rem)] bg-white shadow-md rounded-lg p-4 hover:bg-gray-100 transition";
                 card.innerHTML = `
             <div class="flex justify-between items-start">
-                <h3 class="text-xl font-semibold text-gray-800">${course.course_name}</h3>
+                <h3 class="text-xl font-semibold text-gray-800 max-w-[90%] break-words whitespace-pre-wrap">${course.course_name}</h3>
                 <div class="relative">
                     <button class="dotsBtn text-2xl p-1 rounded hover:bg-gray-200">&#x22EE;</button>
-                    <div class="modalMenu hidden absolute left-0 mt-2 w-40 bg-white border rounded shadow-lg z-10">
+                    <div class="modalMenu hidden absolute right-0 mt-2 w-40 bg-white border rounded shadow-lg z-10">
                     <button class="editBtn w-full text-left px-4 py-2 hover:bg-gray-100">Edit</button>
                     <form onsubmit=\"return confirm('Are you sure you want to delete this course?');\" action='delete_course.php'  method='post'>
                     <input type='text' style='display:none' name='course_id' value='${course.course_id}'>
@@ -58,7 +82,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     </div>
                 </div>
             </div>
-            <p class="mt-2 text-gray-600">${course.course_description}</p>
+            <p class="mt-2 text-gray-600 break-words whitespace-pre-wrap">${course.course_description}</p>
         `;
                 courseContainer.appendChild(card);
 
@@ -75,6 +99,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     });
                     modalMenu.classList.toggle("hidden");
                 });
+                
 
                 editBtn.addEventListener("click", (e) => {
                     e.preventDefault();
@@ -100,4 +125,16 @@ document.addEventListener("DOMContentLoaded", function () {
             courseContainer.innerHTML = `<p class="text-red-500">Failed to load courses.</p>`;
             console.error(err);
         });
+    
+    document.addEventListener("click", (e) => {
+        const isDotsBtn = e.target.closest(".dotsBtn");
+        const isModalMenu = e.target.closest(".modalMenu");
+
+        if (!isDotsBtn && !isModalMenu) {
+            document.querySelectorAll(".modalMenu").forEach(menu => {
+                menu.classList.add("hidden");
+            });
+        }
+    });
+        
 });

@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", function () {
             document.getElementById('acad_org').textContent = data.acad_org;
             document.getElementById('current_league').textContent = data.current_league;
             document.getElementById('highest_league').textContent = data.highest_league;
-            document.getElementById('streak').textContent = data.streak;
+            document.getElementById('streak').textContent = "N/A";
             document.getElementById('exp').textContent = data.exp;
         })
         .catch(error => {

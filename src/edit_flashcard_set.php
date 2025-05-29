@@ -8,23 +8,25 @@ if (!isset($_SESSION['userID'])) {
     exit();
 }
 
-// $userID = $_SESSION['userID'];
 $setID = $_POST['set_id'];
 $name = $_POST['setName'];
 $description = $_POST['setDesc'];
 $is_public = $_POST['visibility'];
 
-// Simple update query (no strict validation)
-$sql = "UPDATE flashcard_sets 
-        SET name = '$name', description = '$description', is_public = $is_public 
-        WHERE set_id = $setID";
+// Prepare update statement
+$stmt = $conn->prepare("UPDATE flashcard_sets 
+                        SET name = ?, description = ?, is_public = ? 
+                        WHERE set_id = ?");
 
-if ($conn->query($sql) === TRUE) {
-    header("Location: insideCourse.html");  // Redirect wherever you want
+$stmt->bind_param("ssii", $name, $description, $is_public, $setID);
+
+if ($stmt->execute()) {
+    header("Location: insideCourse.html");
     exit();
 } else {
-    echo "Error updating flashcard set: " . $conn->error;
+    echo "Error updating flashcard set: " . $stmt->error;
 }
 
+$stmt->close();
 $conn->close();
 ?>

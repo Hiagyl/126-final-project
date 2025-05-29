@@ -5,17 +5,21 @@ require 'DBConnector.php';
 $flashcardID = $_POST['flashcard_id'];
 $question = $_POST['flashcardQuestion'];
 $answer = $_POST['flashcardAnswer'];
+$setID = $_SESSION['current_set_id'];
 
-$sql = "UPDATE flashcards 
-        SET question = '$question', answer = '$answer' 
-        WHERE flashcard_id = $flashcardID";
+// Prepare update statement
+$stmt = $conn->prepare("UPDATE flashcards SET question = ?, answer = ? WHERE flashcard_id = ?");
+$stmt->bind_param("ssi", $question, $answer, $flashcardID);
 
-if ($conn->query($sql) === TRUE) {
-    header("Location: coursePage.html?course_id=$setID");
+if ($stmt->execute()) {
+    // Assuming you want to redirect with course_id — 
+    // You may need to set $setID earlier or get it from DB/session
+    header("Location: coursePage.html?set_id=$setID");
     exit();
 } else {
-    echo "Error: " . $conn->error;
+    echo "Error: " . $stmt->error;
 }
 
+$stmt->close();
 $conn->close();
 ?>

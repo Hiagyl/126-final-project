@@ -10,8 +10,15 @@
 </head>
 
 <body class="h-screen flex bg-gray-100">
+    <!-- Temporary Alert Modal -->
+    <div id="alertModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+        <div id="alertContent"
+            class="bg-white px-6 py-4 rounded-lg shadow-lg text-sm font-medium text-center max-w-sm w-full border">
+            <!-- Alert message will be injected here -->
+        </div>
+    </div>
     <header class="w-64 bg-white shadow-md p-6 flex flex-col h-screen">
-        <img src="../assets/icons/logo.png" alt="StudySphere logo" class="mb-8" />
+        <img src="../assets/images/logo.png" alt="StudySphere logo" class="mb-8" />
     
         <nav class="flex flex-col flex-grow overflow-auto">
             <a href="homepage.html"
@@ -23,7 +30,7 @@
             <a href="explore.html"
                 class="flex items-center gap-3 my-2 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-md transition duration-200">
                 <img src="../assets/icons/explore.svg" alt="explore icon" class="w-6 h-6" />
-                <span class="font-medium">Explore Tests</span>
+                <span class="font-medium">Explore Flashcards</span>
             </a>
     
             <a href="leaderboard.html"
@@ -55,42 +62,25 @@
         </nav>
     </header>
     <main class="flex-1 p-6 overflow-auto">
-        <div class="flex flex-col justify-between items-start">
-        
-                <button id="backBtn" class="flex items-center gap-2 text-indigo-600 hover:text-indigo-800 mb-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-                    </svg>
-                    Back to My Courses
-                </button>
-                <div class="flex justify-between items-center w-full">
-    
-                <h2 id="setTitle" class="text-3xl font-semibold text-gray-800">Flashcard Sets</h2>
-            
-        
-        
-            <div class="w-12 h-12 bg-gray-300 rounded-full"></div>
-            </div>
-        </div>
-
-
-       
-        <div class="mt-6 flex justify-between items-center gap-4 flex-wrap">
-            <div class="flex items-center bg-white border border-gray-300 rounded-md px-3 py-2 w-full sm:w-1/2">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500 mr-2" fill="none"
-                    viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M21 21l-4.35-4.35M10.5 18a7.5 7.5 0 100-15 7.5 7.5 0 000 15z" />
+        <!-- Back Button -->
+        <div class="mb-4">
+            <button id="backBtn" class="flex items-center gap-2 text-indigo-600 hover:text-indigo-800">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
                 </svg>
-                <input type="text" placeholder="Search" class="outline-none w-full" />
-            </div>
-            <button id="openModalBtn"
-                class="flex items-center gap-2 content-center bg-indigo-600 text-white px-4 py-2 rounded-full hover:bg-indigo-700 whitespace-nowrap">
-                <img src="../assets/icons/plus.svg" alt="plus icon" class="w-5 h-5" />
-                Add Flashcard Set
+                Back to My Courses
             </button>
         </div>
+        
+        <!-- Title and Add Button -->
+        <div class="flex justify-between items-center mb-6 flex-wrap gap-4">
+            <h2 id="courseTitle" class="text-4xl font-extrabold tracking-wide text-gray-900">Loading...</h2>
+            <button id="openModalBtn"
+                class="flex items-center gap-2 bg-indigo-600 text-white px-4 py-2 rounded-full hover:bg-indigo-700 whitespace-nowrap">
+                + Add Flashcard Set
+            </button>
+        </div>
+        <hr>
         <div id="setContainer" class="flex flex-wrap gap-6 mt-6">
         
         </div>

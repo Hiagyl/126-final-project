@@ -18,9 +18,9 @@ document.addEventListener("DOMContentLoaded", function () {
             const card = document.createElement("div");
             card.className = "block w-full sm:w-[calc(33.33%-1rem)] bg-white shadow-md rounded-lg p-4 hover:bg-gray-100 transition";
             card.innerHTML = `
-                <h3 class="text-xl font-semibold text-gray-800 mb-2">${set.name}</h3>
-                <p class="text-gray-700 mb-2">${set.description || ''}</p>
-                <p class="text-gray-600 mb-2">Created by: ${set.owner_name}</p>
+                <h3 class="text-xl font-semibold text-gray-800 mb-2 max-w-[90%] break-words whitespace-pre-wrap">${set.name}</h3>
+                <p class="text-gray-700 mb-2 break-words whitespace-pre-wrap">${set.description || ''}</p>
+                <p class="text-gray-600 mb-2 break-words whitespace-pre-wrap">Created by: ${set.owner_name}</p>
                 <p class="text-gray-500 text-sm mb-4">Date: ${new Date(set.date_created).toLocaleDateString()}</p>
                 <a href="viewCourse.html?set_id=${set.set_id}" 
                    class="inline-block bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700">

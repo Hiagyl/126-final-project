@@ -48,20 +48,32 @@ session_start();
   <!-- Flashcard counter -->
   <div id="flashcardCounter" class="text-center text-gray-600 mb-4 font-medium text-lg">0 / 0</div>
 
-  <!-- Flashcard container -->
-<div class="w-full max-w-4xl">
-    <div id="flashcard"
-        class="card relative w-full h-[300px] bg-white rounded-3xl shadow-2xl cursor-pointer select-none p-10 flex items-center justify-center text-center text-3xl font-semibold text-gray-800">
-        <div class="card-front absolute w-full h-full flex flex-col items-center justify-center px-8">
-            <span class="text-base text-indigo-500 font-medium mb-4">Question</span>
-            <div id="questionText" class="text-gray-800 text-2xl font-semibold text-center">Loading...</div>
-        </div>
-        <div class="card-back absolute w-full h-full flex flex-col items-center justify-center px-8">
-            <span class="text-base text-green-500 font-medium mb-4">Answer</span>
-            <div id="answerText" class="text-gray-800 text-2xl font-semibold text-center">Loading...</div>
-        </div>
+  <div class="w-full max-w-4xl">
+  <div id="flashcard"
+    class="card relative w-full min-h-[300px] bg-white rounded-3xl shadow-2xl cursor-pointer select-none p-10 flex items-center justify-center text-center text-3xl font-semibold text-gray-800">
+
+    <!-- Card Front -->
+    <div class="card-front absolute w-full h-full flex flex-col items-center justify-center px-8">
+      <span class="text-base text-indigo-500 font-medium mb-4">Question</span>
+      <div id="questionText"
+        class="text-gray-800 text-2xl font-semibold text-center break-words whitespace-pre-wrap w-full overflow-x-auto">
+        Loading...
+      </div>
     </div>
+
+    <!-- Card Back -->
+    <div class="card-back absolute w-full h-full flex flex-col items-center justify-center px-8">
+      <span class="text-base text-green-500 font-medium mb-4">Answer</span>
+      <div id="answerText"
+        class="text-gray-800 text-2xl font-semibold text-center break-words whitespace-pre-wrap w-full overflow-x-auto">
+        Loading...
+      </div>
+    </div>
+
+  </div>
 </div>
+
+
 
   <!-- Navigation buttons -->
   <div class="w-full max-w-4xl flex justify-center gap-10 mt-8">

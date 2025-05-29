@@ -14,17 +14,22 @@ $courseID = $_POST['course_id'];
 $courseName = $_POST['courseName'];
 $courseDesc = $_POST['courseDesc'];
 
-// Update course
-$sql = "UPDATE courses 
-        SET course_name = '$courseName', course_description = '$courseDesc' 
-        WHERE course_id = $courseID AND owner_id = $userID";
+// Prepare update statement with placeholders
+$stmt = $conn->prepare("UPDATE courses 
+                        SET course_name = ?, course_description = ? 
+                        WHERE course_id = ? AND owner_id = ?");
 
-if ($conn->query($sql) === TRUE) {
+// Bind parameters: s = string, i = integer
+$stmt->bind_param("ssii", $courseName, $courseDesc, $courseID, $userID);
+
+// Execute and check result
+if ($stmt->execute()) {
     header("Location: myCourses.html");
     exit();
 } else {
-    echo "Error: " . $conn->error;
+    echo "Error: " . $stmt->error;
 }
 
+$stmt->close();
 $conn->close();
 ?>

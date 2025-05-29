@@ -14,23 +14,29 @@ $courseName = $_POST['courseName'];
 $courseDesc = $_POST['courseDesc'];
 
 // Check if course already exists for this user
-$check = "SELECT * FROM courses WHERE course_name = '$courseName' AND owner_id = $userID";
-$result = $conn->query($check);
+$check = $conn->prepare("SELECT * FROM courses WHERE course_name = ? AND owner_id = ?");
+$check->bind_param("si", $courseName, $userID);
+$check->execute();
+$result = $check->get_result();
 
 if ($result && $result->num_rows > 0) {
-    echo "Course already exists. Please choose another name.";
+    header("Location: myCourses.html?alert=error&msg=Course+already+exists.+Please+change+the+name.");
+    exit();
 } else {
     // Insert course
-    $sql = "INSERT INTO courses (owner_id, course_name, course_description) 
-            VALUES ('$userID', '$courseName', '$courseDesc')";
+    $stmt = $conn->prepare("INSERT INTO courses (owner_id, course_name, course_description) VALUES (?, ?, ?)");
+    $stmt->bind_param("iss", $userID, $courseName, $courseDesc);
 
-    if ($conn->query($sql) === TRUE) {
+    if ($stmt->execute()) {
         header("Location: myCourses.html");
         exit();
     } else {
-        echo "Error: " . $conn->error;
+        echo "Error: " . $stmt->error;
     }
+
+    $stmt->close();
 }
 
+$check->close();
 $conn->close();
 ?>

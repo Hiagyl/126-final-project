@@ -10,10 +10,16 @@
     <title>My Courses</title>
 </head>
 
-<body class="h-screen flex bg-gray-50 font-sans text-gray-900">
-
+<body class="h-screen flex bg-gray-100">
+    <!-- Temporary Alert Modal -->
+    <div id="alertModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+        <div id="alertContent"
+            class="bg-white px-6 py-4 rounded-lg shadow-lg text-sm font-medium text-center max-w-sm w-full border">
+            <!-- Alert message will be injected here -->
+        </div>
+    </div>
     <header class="w-64 bg-white shadow-md p-6 flex flex-col h-screen">
-        <img src="../assets/icons/logo.png" alt="StudySphere logo" class="mb-8" />
+        <img src="../assets/images/logo.png" alt="StudySphere logo" class="mb-8" />
     
         <nav class="flex flex-col flex-grow overflow-auto">
             <a href="homepage.html"
@@ -25,7 +31,7 @@
             <a href="explore.html"
                 class="flex items-center gap-3 my-2 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-md transition duration-200">
                 <img src="../assets/icons/explore.svg" alt="explore icon" class="w-6 h-6" />
-                <span class="font-medium">Explore Tests</span>
+                <span class="font-medium">Explore Flashcards</span>
             </a>
     
             <a href="leaderboard.html"
@@ -55,116 +61,74 @@
                 <span>Logout</span>
             </a>
         </nav>
-        </header>
+    </header>
 
-    <main class="flex-1 p-8 overflow-auto max-w-7xl mx-auto">
-        <div class="flex justify-between items-center mb-8">
-            <h2 class="text-4xl font-extrabold tracking-tight text-gray-900">My Courses</h2>
-            <div class="w-12 h-12 rounded-full bg-gray-300"></div>
-        </div>
-
-        <div class="flex flex-wrap justify-between items-center gap-4 sm:gap-6 mb-8 max-w-lg">
-            <label for="searchInput" class="sr-only">Search courses</label>
-            <div
-                class="flex items-center bg-white border border-gray-300 rounded-full px-4 py-2 shadow-sm w-full sm:w-auto flex-grow sm:flex-grow-0 focus-within:ring-2 focus-within:ring-indigo-500 transition">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400 mr-3" fill="none"
-                    viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M21 21l-4.35-4.35M10.5 18a7.5 7.5 0 100-15 7.5 7.5 0 000 15z" />
-                </svg>
-                <input id="searchInput" type="text" placeholder="Search courses"
-                    class="outline-none w-full text-gray-900 placeholder-gray-400 bg-transparent" />
+    <main class="flex-1 p-8">
+        <!-- <div class="flex justify-between items-start"> -->
+            <div class="flex justify-between items-center mb-8">
+                <h2 class="text-4xl font-extrabold tracking-wide text-gray-900">My Courses</h2>
+                <button id="openModalBtn"
+                    class="flex items-center gap-2 bg-indigo-600 text-white px-4 py-2 rounded-full hover:bg-indigo-700 whitespace-nowrap">
+                    + Add Course Folder
+                </button>
             </div>
+            
+        <hr>
+        <!-- </div> -->
 
-            <button id="openModalBtn"
-                class="inline-flex items-center gap-2 bg-indigo-600 text-white px-5 py-2 rounded-full shadow-md hover:bg-indigo-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 transition whitespace-nowrap">
-                <img src="../assets/icons/plus.svg" alt="" class="w-5 h-5" aria-hidden="true" />
-                Add Course Folder
-            </button>
-        </div>
-
-        <section id="courseContainer" class="flex flex-wrap gap-6">
-            <!-- Course cards go here, e.g.: -->
-            <!--
-        <article
-          class="bg-white rounded-lg shadow-md p-6 w-full sm:w-64 hover:shadow-lg transition cursor-pointer">
-          <h3 class="text-lg font-semibold mb-2">Course Name</h3>
-          <p class="text-gray-600 text-sm">Brief description of the course folder.</p>
-        </article>
-        -->
-        </section>
+        <div id="courseContainer" class="flex flex-wrap gap-6 mt-6"></div>
     </main>
 
-    <!-- Modal (Add Course) -->
-    <div id="modalBackdrop" aria-hidden="true"
-        class="fixed inset-0 bg-black/50 hidden flex justify-center items-center z-40 transition-opacity duration-300">
-        <form action="add_course.php" method="POST"
-            class="bg-white rounded-lg shadow-xl w-full max-w-md relative p-6 focus:outline-none" role="dialog"
-            aria-modal="true" aria-labelledby="modalTitle">
-            <button type="button" id="closeModalBtn" aria-label="Close Add Course modal"
-                class="absolute top-3 right-4 text-gray-500 hover:text-gray-700 text-3xl font-bold focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 transition">&times;</button>
+    <div id="modalBackdrop" class="fixed inset-0 bg-black/50 hidden flex justify-center items-center z-30">
+        <form action="add_course.php" method="POST" class="bg-white rounded-lg shadow-xl w-full max-w-md relative p-6">
+            <button type="button" id="closeModalBtn"
+                class="absolute top-2 right-3 text-gray-500 hover:text-gray-700 text-xl">&times;</button>
 
-            <h2 id="modalTitle" class="text-2xl font-semibold mb-6">Add Course</h2>
+            <h2 class="text-2xl font-semibold mb-4" id="modalTitle">Add Course</h2>
 
-            <div class="space-y-5">
-                <label for="courseNameAdd" class="block text-sm font-medium text-gray-700">Course Name</label>
-                <input id="courseNameAdd" type="text" name="courseName" placeholder="Course Name" required
-                    class="w-full px-4 py-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" />
-
-                <label for="courseDescAdd" class="block text-sm font-medium text-gray-700">Course Description</label>
-                <textarea id="courseDescAdd" name="courseDesc" placeholder="Course Description" rows="4"
-                    class="w-full px-4 py-3 border rounded-md resize-none focus:outline-none focus:ring-2 focus:ring-indigo-500"></textarea>
+            <div class="space-y-4">
+                <input type="text" name="courseName" placeholder="Course Name" required
+                    class="w-full px-4 py-2 border rounded focus:outline-none" />
+                <textarea name="courseDesc" placeholder="Course Description" rows="4"
+                    class="w-full px-4 py-2 border rounded focus:outline-none resize-none"></textarea>
             </div>
 
-            <div class="mt-8 flex justify-end gap-3">
-                <button type="button" id="cancelModalBtn"
-                    class="px-5 py-2 bg-gray-300 rounded-md hover:bg-gray-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 transition">
+            <div class="mt-6 flex justify-end gap-2">
+                <button type="button" id="cancelModalBtn" class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400">
                     Cancel
                 </button>
-                <button type="submit"
-                    class="px-5 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 transition">
+                <button type="submit" class="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700">
                     Save
                 </button>
             </div>
         </form>
     </div>
 
-    <!-- Modal (Edit Course) -->
-    <div id="modalBackdrop2" aria-hidden="true"
-        class="fixed inset-0 bg-black/50 hidden flex justify-center items-center z-40 transition-opacity duration-300">
-        <form action="edit_course.php" method="POST"
-            class="bg-white rounded-lg shadow-xl w-full max-w-md relative p-6 focus:outline-none" role="dialog"
-            aria-modal="true" aria-labelledby="modalTitleEdit">
-            <button type="button" id="closeModalBtn2" aria-label="Close Edit Course modal"
-                class="absolute top-3 right-4 text-gray-500 hover:text-gray-700 text-3xl font-bold focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 transition">&times;</button>
+    <div id="modalBackdrop2" class="fixed inset-0 bg-black/50 hidden flex justify-center items-center z-30">
+        <form action="edit_course.php" method="POST" class="bg-white rounded-lg shadow-xl w-full max-w-md relative p-6">
+            <button type="button" id="closeModalBtn2"
+                class="absolute top-2 right-3 text-gray-500 hover:text-gray-700 text-xl">&times;</button>
 
-            <h2 id="modalTitleEdit" class="text-2xl font-semibold mb-6">Edit Course</h2>
+            <h2 class="text-2xl font-semibold mb-4" id="modalTitle">Edit Course</h2>
 
-            <div class="space-y-5">
-                <input type="hidden" id="courseID" name="course_id" />
-                <label for="courseNameEdit" class="block text-sm font-medium text-gray-700">Course Name</label>
-                <input id="courseNameEdit" type="text" name="courseName" placeholder="Course Name" required
-                    class="w-full px-4 py-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" />
-
-                <label for="courseDescEdit" class="block text-sm font-medium text-gray-700">Course Description</label>
-                <textarea id="courseDescEdit" name="courseDesc" placeholder="Course Description" rows="4"
-                    class="w-full px-4 py-3 border rounded-md resize-none focus:outline-none focus:ring-2 focus:ring-indigo-500"></textarea>
+            <div class="space-y-4">
+                <input type="hidden" id="courseID" name="course_id">
+                <input type="text" id="courseName" name="courseName" placeholder="Course Name" required
+                    class="w-full px-4 py-2 border rounded focus:outline-none" />
+                <textarea id="courseDesc" name="courseDesc" placeholder="Course Description" rows="4"
+                    class="w-full px-4 py-2 border rounded focus:outline-none resize-none"></textarea>
             </div>
 
-            <div class="mt-8 flex justify-end gap-3">
-                <button type="button" id="cancelModalBtn2"
-                    class="px-5 py-2 bg-gray-300 rounded-md hover:bg-gray-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 transition">
+            <div class="mt-6 flex justify-end gap-2">
+                <button type="button" id="cancelModalBtn2" class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400">
                     Cancel
                 </button>
-                <button type="submit"
-                    class="px-5 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 transition">
+                <button type="submit" class="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700">
                     Save
                 </button>
             </div>
         </form>
     </div>
-
 </body>
-  
 
 </html>

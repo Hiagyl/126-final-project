@@ -14,9 +14,34 @@ document.addEventListener("DOMContentLoaded", function () {
     const takeQuizBtn = document.getElementById('takeQuizBtn');
     const reviewFlashcardsBtn = document.getElementById('reviewFlashcardsBtn');
 
+    const setNameElem = document.getElementById('setTitle');
     const urlParams = new URLSearchParams(window.location.search);
     const setID = urlParams.get("set_id");
 
+    if (setID) {
+        fetch("set_current_fset.php", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            body: "set_id=" + encodeURIComponent(setID)
+        });
+    }
+
+    fetch(`get_set_title.php?set_id=${setID}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.set_name) {
+                setNameElem.textContent = data.set_name;
+            } else if (data.error) {
+                setNameElem.textContent = "Set name unavailable";
+                console.error("Error fetching set name:", data.error);
+            }
+        })
+        .catch(err => {
+            setNameElem.textContent = "Failed to load set name";
+            console.error(err);
+        });
     // Function to wrap button with its prompt for better UI layout
     function createButtonWrapper(button, prompt) {
         const wrapper = document.createElement('div');
@@ -45,15 +70,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (takeQuizBtn) createButtonWrapper(takeQuizBtn, takeQuizPrompt);
     if (reviewFlashcardsBtn) createButtonWrapper(reviewFlashcardsBtn, reviewFlashcardsPrompt);
 
-    if (setID) {
-        fetch("set_current_fset.php", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/x-www-form-urlencoded"
-            },
-            body: "set_id=" + encodeURIComponent(setID)
-        });
-    }
+    
 
     openBtn.addEventListener("click", () => modal.classList.remove("hidden"));
     closeBtn.addEventListener("click", () => modal.classList.add("hidden"));
@@ -129,13 +146,14 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
 
                 flashcardCard.innerHTML = `
-                    <div class="flex justify-between items-center">
-                        <p class="text-lg font-semibold">Q: ${flashcard.question}</p>
+                    <div class="flex justify-between items-start w-full">
+                        <p class="text-lg font-semibold break-words whitespace-pre-wrap w-full max-w-[90%]">Q: ${flashcard.question}</p>
                         ${menuHTML}
                     </div>
-                    <hr>
-                    <p class="text-gray-700">A: ${flashcard.answer}</p>
-                `;
+                    <hr class="my-2">
+                    <p class="text-gray-700 break-words whitespace-pre-wrap w-full overflow-x-auto">A: ${flashcard.answer}</p>
+                    `;
+
                 flashcardContainer.appendChild(flashcardCard);
 
                 if (data.is_owner) {

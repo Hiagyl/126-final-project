@@ -8,44 +8,52 @@
     <title>Course Page</title>
 </head>
 
-<body class="h-screen flex bg-gray-100">
+<body class="h-screen flex bg-gray-100 relative">
+    <!-- Temporary Alert Modal -->
+    <div id="alertModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+        <div id="alertContent"
+            class="bg-white px-6 py-4 rounded-lg shadow-lg text-sm font-medium text-center max-w-sm w-full border">
+            <!-- Alert message will be injected here -->
+        </div>
+    </div>
+
     <!-- Sidebar -->
     <header class="w-64 bg-white shadow-md p-6 flex flex-col h-screen">
         <img src="../assets/icons/logo.png" alt="StudySphere logo" class="mb-8" />
-    
+
         <nav class="flex flex-col flex-grow overflow-auto">
             <a href="homepage.html"
                 class="flex items-center gap-3 my-2 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-md transition duration-200">
                 <img src="../assets/icons/home.svg" alt="home icon" class="w-6 h-6" />
                 <span class="font-medium">Homepage</span>
             </a>
-    
+
             <a href="explore.html"
                 class="flex items-center gap-3 my-2 px-4 py-3 bg-indigo-100 text-indigo-700 font-semibold rounded-md cursor-default">
                 <img src="../assets/icons/explore.svg" alt="explore icon" class="w-6 h-6" />
-                <span class="font-medium">Explore Tests</span>
+                <span class="font-medium">Explore Flashcards</span>
             </a>
-    
+
             <a href="leaderboard.html"
                 class="flex items-center gap-3 my-2 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-md transition duration-200">
                 <img src="../assets/icons/leaderboard.svg" alt="leaderboard icon" class="w-6 h-6" />
                 <span class="font-medium">Leaderboards</span>
             </a>
-    
+
             <hr class="my-4 border-gray-300" />
-    
+
             <a href="myCourses.html"
                 class="flex items-center gap-3 my-2 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-md transition duration-200">
                 <img src="../assets/icons/course.svg" alt="course icon" class="w-6 h-6" />
                 <span class="font-medium">My Courses</span>
             </a>
-    
+
             <a href="profile.html"
                 class="flex items-center gap-3 my-2 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-md transition duration-200">
                 <img src="../assets/icons/profile.svg" alt="profile icon" class="w-6 h-6" />
                 <span class="font-medium">Profile</span>
             </a>
-    
+
             <hr class="my-2" />
             <a href="logout.php"
                 class="flex items-center gap-2 mt-auto px-4 py-2 text-red-600 hover:bg-red-100 rounded-md cursor-pointer">
@@ -66,7 +74,7 @@
         </button>
 
         <div class="flex items-center justify-between mb-2">
-            <div id="courseTitle" class="text-3xl font-semibold text-gray-800">Loading...</div>
+            <div id="courseTitle" class="text-3xl font-semibold text-gray-800">Viewing Flashcard Set</div>
         </div>
 
         <hr class="mb-6 border-gray-300" />
@@ -91,7 +99,6 @@
                 <option value="" disabled selected>Select a course...</option>
             </select>
 
-            <!-- Hidden input to carry set_id -->
             <input type="hidden" id="setIdInput" name="set_id" />
 
             <div class="mt-6 flex justify-end gap-2">
@@ -114,13 +121,50 @@
             const flashcardContainer = document.getElementById("flashcardContainer");
             const backBtn = document.getElementById("backBtn");
             const setIdInput = document.getElementById("setIdInput");
+            const alertModal = document.getElementById("alertModal");
+            const alertContent = document.getElementById("alertContent");
 
             const urlParams = new URLSearchParams(window.location.search);
             const setID = urlParams.get("set_id");
 
+            const alertType = urlParams.get('alert');
+            const alertMsg = urlParams.get('msg');
+
+            // After setID is retrieved and used
+            if (setID) {
+                // Update the course title
+                fetch(`get_set_title.php?set_id=${setID}`)
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.set_name) {
+                            document.getElementById("courseTitle").textContent = data.set_name;
+                        } else {
+                            console.error(data.error || "Failed to fetch set name.");
+                        }
+                    })
+                    .catch(err => console.error("Error fetching set name:", err));
+            }
+
+            if (alertType && alertMsg) {
+                const decodedMsg = decodeURIComponent(alertMsg);
+                alertContent.textContent = decodedMsg;
+
+                if (alertType === 'success') {
+                    alertContent.classList.add("bg-green-100", "text-green-800", "border-green-300");
+                } else {
+                    alertContent.classList.add("bg-red-100", "text-red-800", "border-red-300");
+                }
+
+                alertModal.classList.remove("hidden");
+
+                setTimeout(() => {
+                    alertModal.classList.add("hidden");
+                    alertContent.className = "bg-white px-6 py-4 rounded-lg shadow-lg text-sm font-medium text-center max-w-sm w-full border";
+                }, 3000);
+            }
+
             if (setID) {
                 setIdInput.value = setID;
-
                 fetch("set_current_fset.php", {
                     method: "POST",
                     headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -140,7 +184,7 @@
                             courseSelect.appendChild(option);
                         });
                     } else {
-                        alert("Failed to load courses");
+                        console.error("Invalid course data format");
                     }
                 })
                 .catch(err => console.error("Course fetch error:", err));
@@ -157,7 +201,6 @@
                     }
 
                     const flashcards = data.flashcards;
-                    // const isOwner = data.is_owner;
 
                     if (!Array.isArray(flashcards) || flashcards.length == 0) {
                         flashcardContainer.innerHTML = `<p class="text-red-500">No flashcards found.</p>`;
@@ -167,12 +210,9 @@
                     flashcards.forEach(card => {
                         const cardEl = document.createElement("div");
                         cardEl.className = "bg-white shadow-md rounded-lg p-4 mb-4";
-
                         cardEl.innerHTML = `
-              <p class="text-lg font-semibold">Q: ${card.question}</p>
-              <p class="text-gray-600 mt-2">A: ${card.answer}</p>
-            `;
-
+                            <p class="text-lg font-semibold">Q: ${card.question}</p>
+                            <p class="text-gray-600 mt-2">A: ${card.answer}</p>`;
                         flashcardContainer.appendChild(cardEl);
                     });
                 })

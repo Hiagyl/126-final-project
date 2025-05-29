@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const setNameEl = document.getElementById("setName");
+    // const setNameEl = document.getElementById("setName");
     const counterEl = document.getElementById("flashcardCounter");
     const questionText = document.getElementById("questionText");
     const answerInput = document.getElementById("answerInput");
@@ -89,7 +89,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
             flashcards = data.flashcards;
-            setNameEl.textContent = "Flashcard Test";
+            // setNameEl.textContent = "Flashcard Quiz";
             showQuestion();
         })
         .catch(err => {
