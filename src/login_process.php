@@ -14,7 +14,7 @@ if ($result->num_rows == 1) {
     // Successful login
     $user = $result->fetch_assoc();
     $_SESSION['userID'] = $user['user_id'];
-    $_SESSION['username'] = $user['username']; // Store username in session
+    $_SESSION['username'] = $user['username']; 
     $_SESSION['college'] = $user['college'];
     $_SESSION['year_level'] = $user['year_level'];
     $_SESSION['acad_org'] = $user['acad_org'];

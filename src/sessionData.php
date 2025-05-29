@@ -1,5 +1,8 @@
 <?php
 session_start();
+error_log("Session: " . print_r($_SESSION, true));
+
+require 'DBConnector.php';
 header('Content-Type: application/json');
 
 if (!isset($_SESSION['userID'])) {
@@ -8,7 +11,7 @@ if (!isset($_SESSION['userID'])) {
     exit;
 }
 
-require 'DBConnector.php';
+
 
 function getLeagueName($conn, $id)
 {
@@ -29,3 +32,5 @@ echo json_encode([
 ]);
 
 $conn->close();
+
+?>

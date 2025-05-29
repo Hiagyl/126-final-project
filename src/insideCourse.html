@@ -1,4 +1,3 @@
-<!-- myCourses.html -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,49 +5,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="insideCourse.js" defer></script>
+    <script src="insideCourse.js"></script>
     <title>My Courses</title>
 </head>
 
 <body class="h-screen flex bg-gray-100">
-    <header class="w-64 bg-white shadow-md p-6 flex flex-col">
-        <img src="../assets/icons/logo.png" alt="StudySphere logo" />
-
-        <nav class="flex flex-col h-screen">
+    <header class="w-64 bg-white shadow-md p-6 flex flex-col h-screen">
+        <img src="../assets/icons/logo.png" alt="StudySphere logo" class="mb-8" />
+    
+        <nav class="flex flex-col flex-grow overflow-auto">
             <a href="homepage.html"
-                class="flex items-center gap-2 my-2 px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md">
-                <img src="../assets/icons/home.svg" alt="home icon" class="w-5 h-5" />
-                <span>Homepage</span>
+                class="flex items-center gap-3 my-2 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-md transition duration-200">
+                <img src="../assets/icons/home.svg" alt="home icon" class="w-6 h-6" />
+                <span class="font-medium">Homepage</span>
             </a>
-
+    
             <a href="explore.html"
-                class="flex items-center gap-2 my-2 px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md">
-                <img src="../assets/icons/explore.svg" alt="explore icon" class="w-5 h-5" />
-                <span>Explore Tests</span>
+                class="flex items-center gap-3 my-2 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-md transition duration-200">
+                <img src="../assets/icons/explore.svg" alt="explore icon" class="w-6 h-6" />
+                <span class="font-medium">Explore Tests</span>
             </a>
-
+    
             <a href="leaderboard.html"
-                class="flex items-center gap-2 my-2 px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md">
-                <img src="../assets/icons/leaderboard.svg" alt="leaderboard icon" class="w-5 h-5" />
-                <span>Leaderboards</span>
+                class="flex items-center gap-3 my-2 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-md transition duration-200">
+                <img src="../assets/icons/leaderboard.svg" alt="leaderboard icon" class="w-6 h-6" />
+                <span class="font-medium">Leaderboards</span>
             </a>
-
-            <hr class="my-2" />
-
+    
+            <hr class="my-4 border-gray-300" />
+    
             <a href="myCourses.html"
-                class="flex items-center gap-2 my-2 px-4 py-2 bg-indigo-100 text-indigo-700 font-semibold rounded-md">
-                <img src="../assets/icons/home.svg" alt="home icon" class="w-5 h-5" />
-                <span>My Courses</span>
+                class="flex items-center gap-3 my-2 px-4 py-3 bg-indigo-100 text-indigo-700 font-semibold rounded-md cursor-default">
+                <img src="../assets/icons/course.svg" alt="course icon" class="w-6 h-6" />
+                <span class="font-medium">My Courses</span>
             </a>
-
+    
             <a href="profile.html"
-                class="flex items-center gap-2 my-2 px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md">
-                <img src="../assets/icons/profile.svg" alt="profile icon" class="w-5 h-5" />
-                <span>Profile</span>
+                class="flex items-center gap-3 my-2 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-md transition duration-200">
+                <img src="../assets/icons/profile.svg" alt="profile icon" class="w-6 h-6" />
+                <span class="font-medium">Profile</span>
+            </a>
+    
+            <hr class="my-2" />
+            <a href="logout.php"
+                class="flex items-center gap-2 mt-auto px-4 py-2 text-red-600 hover:bg-red-100 rounded-md cursor-pointer">
+                <img src="../assets/icons/logout.svg" alt="logout icon" class="w-5 h-5" />
+                <span>Logout</span>
             </a>
         </nav>
     </header>
-    <main class="flex-1 p-6">
+    <main class="flex-1 p-6 overflow-auto">
         <div class="flex flex-col justify-between items-start">
         
                 <button id="backBtn" class="flex items-center gap-2 text-indigo-600 hover:text-indigo-800 mb-2">
@@ -171,7 +177,7 @@
     <script>
    
         document.getElementById("backBtn").addEventListener("click", () => {
-            window.history.back();
+            window.location.href = "myCourses.html";
         });
     </script>
 </body>

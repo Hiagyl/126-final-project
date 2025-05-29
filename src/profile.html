@@ -3,120 +3,203 @@
 
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="profile.js" defer></script>
-
     <title>StudySphere</title>
 </head>
 
-<body class="h-screen flex bg-gray-100">
+<body class="h-screen flex bg-gray-50 text-gray-800 font-sans">
     <!-- Sidebar -->
-    <header class="w-64 bg-white shadow-md p-6 flex flex-col">
-        <img src="../assets/icons/logo.png" alt="StudySphere logo" />
-        <nav class="flex flex-col h-screen">
+    <header class="w-64 bg-white shadow-md p-6 flex flex-col h-screen">
+        <img src="../assets/icons/logo.png" alt="StudySphere logo" class="mb-8" />
+    
+        <nav class="flex flex-col flex-grow overflow-auto">
             <a href="homepage.html"
-                class="flex items-center gap-2 my-2 px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md">
-                <img src="../assets/icons/home.svg" alt="home icon" class="w-5 h-5" />
-                <span>Homepage</span>
+                class="flex items-center gap-3 my-2 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-md transition duration-200">
+                <img src="../assets/icons/home.svg" alt="home icon" class="w-6 h-6" />
+                <span class="font-medium">Homepage</span>
             </a>
+    
             <a href="explore.html"
-                class="flex items-center gap-2 my-2 px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md">
-                <img src="../assets/icons/explore.svg" alt="explore icon" class="w-5 h-5" />
-                <span>Explore Tests</span>
+                class="flex items-center gap-3 my-2 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-md transition duration-200">
+                <img src="../assets/icons/explore.svg" alt="explore icon" class="w-6 h-6" />
+                <span class="font-medium">Explore Tests</span>
             </a>
+    
             <a href="leaderboard.html"
-                class="flex items-center gap-2 my-2 px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md">
-                <img src="../assets/icons/leaderboard.svg" alt="leaderboard icon" class="w-5 h-5" />
-                <span>Leaderboards</span>
+                class="flex items-center gap-3 my-2 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-md transition duration-200">
+                <img src="../assets/icons/leaderboard.svg" alt="leaderboard icon" class="w-6 h-6" />
+                <span class="font-medium">Leaderboards</span>
             </a>
-            <hr class="my-2" />
+    
+            <hr class="my-4 border-gray-300" />
+    
             <a href="myCourses.html"
-                class="flex items-center gap-2 my-2 px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md">
-                <img src="../assets/icons/course.svg" alt="course icon" class="w-5 h-5" />
-                <span>My Courses</span>
+                class="flex items-center gap-3 my-2 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-md transition duration-200">
+                <img src="../assets/icons/course.svg" alt="course icon" class="w-6 h-6" />
+                <span class="font-medium">My Courses</span>
             </a>
+    
             <a href="profile.html"
-                class="flex items-center gap-2 my-2 px-4 py-2 bg-indigo-100 text-indigo-700 font-semibold rounded-md">
-                <img src="../assets/icons/profile.svg" alt="profile icon" class="w-5 h-5" />
-                <span>Profile</span>
+                class="flex items-center gap-3 my-2 px-4 py-3 bg-indigo-100 text-indigo-700 font-semibold rounded-md cursor-default">
+                <img src="../assets/icons/profile.svg" alt="profile icon" class="w-6 h-6" />
+                <span class="font-medium">Profile</span>
+            </a>
+    
+            <hr class="my-2" />
+            <a href="logout.php"
+                class="flex items-center gap-2 mt-auto px-4 py-2 text-red-600 hover:bg-red-100 rounded-md cursor-pointer">
+                <img src="../assets/icons/logout.svg" alt="logout icon" class="w-5 h-5" />
+                <span>Logout</span>
             </a>
         </nav>
     </header>
 
-    <main class="flex-1 p-6 z-10">
-        <h2 class="text-3xl font-semibold text-gray-800 mb-6">Profile</h2>
+    <main class="flex-1 p-8 overflow-y-auto">
+        <h2 class="text-4xl font-extrabold mb-8 tracking-wide text-gray-900">Profile</h2>
 
-        <div class="bg-white rounded-lg shadow-md p-6 flex items-start gap-6 mb-8">
+        <section
+            class="bg-white rounded-xl shadow-lg p-8 flex items-center gap-8 max-w-4xl mx-auto hover:shadow-xl transition-shadow relative group">
             <div
-                class="w-40 h-40 bg-gray-300 rounded-full flex-shrink-0 flex items-center justify-center text-gray-500 text-3xl">
-                IMG
+                class="w-40 h-40 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-400 text-5xl font-bold select-none drop-shadow-md">
+                <!-- Replace with real img -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-20 h-20" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M12 4a4 4 0 100 8 4 4 0 000-8zm0 10c-4.418 0-8 1.79-8 4v2h16v-2c0-2.21-3.582-4-8-4z" />
+                </svg>
             </div>
-            <div class="flex-1 h-40 flex flex-col justify-between">
-                <p class="text-lg text-gray-700"><span class="font-semibold">Username:</span> <span id="username"></span></p>
-                <p class="text-lg text-gray-700"><span class="font-semibold">College:</span> <span id="college"></span></p>
-                <p class="text-lg text-gray-700"><span class="font-semibold">Year Level:</span> <span id="year_level"></span></p>
-                <p class="text-lg text-gray-700"><span class="font-semibold">Academic Org:</span> <span id="acad_org"></span></p>
+
+            <div class="flex-1 flex flex-col justify-between h-40">
+                <p class="text-lg"><span class="font-semibold text-gray-700">Username:</span> <span id="username"
+                        class="text-indigo-700"></span></p>
+                <p class="text-lg"><span class="font-semibold text-gray-700">College:</span> <span id="college"
+                        class="text-indigo-700"></span></p>
+                <p class="text-lg"><span class="font-semibold text-gray-700">Year Level:</span> <span id="year_level"
+                        class="text-indigo-700"></span></p>
+                <p class="text-lg"><span class="font-semibold text-gray-700">Academic Org:</span> <span id="acad_org"
+                        class="text-indigo-700"></span></p>
             </div>
-            <button class="text-gray-500 hover:text-gray-700">
+
+            <button id="openEditProfileModalBtn"
+                class="absolute top-4 right-4 p-2 rounded-md text-gray-400 hover:text-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-300 transition"
+                aria-label="Edit profile">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round"
                         d="M11 5H6a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2v-5M18.5 2.5a2.121 2.121 0 113 3L12 15l-4 1 1-4 9.5-9.5z" />
                 </svg>
             </button>
-        </div>
+        </section>
 
-        <div class="grid grid-cols-2 gap-4">
-            <div class="flex items-center bg-white shadow-md rounded-lg p-4">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-orange-500 mr-4" fill="none"
+        <section class="mt-10 max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+            <div
+                class="flex items-center bg-white rounded-xl shadow-md p-6 gap-5 hover:shadow-lg transition-shadow cursor-default">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-orange-500 flex-shrink-0" fill="none"
                     viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round"
                         d="M12 3v2m0 14v2m9-9h-2M5 12H3m15.364-6.364l-1.414 1.414M6.05 17.95l-1.414 1.414m0-13.828l1.414 1.414M17.95 17.95l1.414 1.414M12 8a4 4 0 100 8 4 4 0 000-8z" />
                 </svg>
                 <div>
-                    <p class="text-xl font-bold text-gray-800" id="streak">...</p>
-                    <p class="text-sm text-gray-600">Day Streak</p>
+                    <p class="text-2xl font-bold text-gray-900" id="streak">...</p>
+                    <p class="text-sm font-medium text-gray-500">Day Streak</p>
                 </div>
             </div>
 
-            <div class="flex items-center bg-white shadow-md rounded-lg p-4">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-yellow-500 mr-4" fill="none"
+            <div
+                class="flex items-center bg-white rounded-xl shadow-md p-6 gap-5 hover:shadow-lg transition-shadow cursor-default">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-yellow-500 flex-shrink-0" fill="none"
                     viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round"
                         d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.974a1 1 0 00.95.69h4.18c.969 0 1.371 1.24.588 1.81l-3.39 2.462a1 1 0 00-.364 1.118l1.286 3.974c.3.921-.755 1.688-1.54 1.118L12 15.347l-3.39 2.462c-.784.57-1.838-.197-1.539-1.118l1.285-3.974a1 1 0 00-.364-1.118L4.602 9.401c-.783-.57-.38-1.81.588-1.81h4.18a1 1 0 00.95-.69l1.286-3.974z" />
                 </svg>
                 <div>
-                    <p class="text-xl font-bold text-gray-800" id="exp">...</p>
-                    <p class="text-sm text-gray-600">Experience</p>
+                    <p class="text-2xl font-bold text-gray-900" id="exp">...</p>
+                    <p class="text-sm font-medium text-gray-500">Experience</p>
                 </div>
             </div>
 
-            <div class="flex items-center bg-white shadow-md rounded-lg p-4">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-blue-500 mr-4" fill="none"
+            <div
+                class="flex items-center bg-white rounded-xl shadow-md p-6 gap-5 hover:shadow-lg transition-shadow cursor-default">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-blue-500 flex-shrink-0" fill="none"
                     viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round"
                         d="M12 2L2 7v6c0 5.523 3.582 10.252 9 12 5.418-1.748 9-6.477 9-12V7l-10-5z" />
                 </svg>
                 <div>
-                    <p class="text-xl font-bold text-gray-800" id="current_league">...</p>
-                    <p class="text-sm text-gray-600">Current League</p>
+                    <p class="text-2xl font-bold text-gray-900" id="current_league">...</p>
+                    <p class="text-sm font-medium text-gray-500">Current League</p>
                 </div>
             </div>
 
-            <div class="flex items-center bg-white shadow-md rounded-lg p-4">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-indigo-500 mr-4" fill="none"
+            <div
+                class="flex items-center bg-white rounded-xl shadow-md p-6 gap-5 hover:shadow-lg transition-shadow cursor-default">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-indigo-500 flex-shrink-0" fill="none"
                     viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round"
                         d="M8 21l4-2 4 2v-4l3-3-4.2-.6L12 9l-2.8 4.4L5 14l3 3v4z" />
                 </svg>
                 <div>
-                    <p class="text-xl font-bold text-gray-800" id="highest_league">...</p>
-                    <p class="text-sm text-gray-600">Highest Rank</p>
+                    <p class="text-2xl font-bold text-gray-900" id="highest_league">...</p>
+                    <p class="text-sm font-medium text-gray-500">Highest Rank</p>
                 </div>
             </div>
-        </div>
+        </section>
     </main>
+
+    <div id="editProfileModalBackDrop" class="fixed inset-0 bg-black/50 hidden flex justify-center items-center z-30">
+        <form method="POST" action="profile_edit.php"
+            class="bg-white rounded-lg shadow-xl w-full max-w-xl relative p-6">
+            <button id="closeEditProfileModalBtn"
+                class="absolute top-2 right-3 text-gray-500 hover:text-gray-700 text-xl">&times;</button>
+            <h2 class="text-2xl font-semibold mb-4">Edit Profile</h2>
+            <div class="flex justify-center items-center">
+                <div class="relative">
+                    <!-- Circle -->
+                    <div
+                        class="w-40 h-40 bg-gray-300 rounded-full flex items-center justify-center text-gray-500 text-3xl">
+                        IMG
+                    </div>
+                    <!-- Plus-circle button -->
+                    <button
+                        class="absolute bottom-1 right-3 bg-blue-500 text-white rounded-full p-1.5 shadow hover:bg-blue-600">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-800">Name</h3>
+            <input id="editProfileName" type="text" name="editProfileName" placeholder="Change Name"
+                class="w-full px-4 py-2 border rounded focus:outline-none mb-4" />
+            <h3 class="text-xl font-semibold text-gray-800">College</h3>
+            <input id="editCollege" type="text" name="editCollege" placeholder="Current College"
+                class="w-full px-4 py-2 border rounded focus:outline-none" />
+            <h3 class="text-xl font-semibold text-gray-800">Year Level</h3>
+            <select id="editYearLevel" name="editYearLevel" required
+                class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-400">
+                <option value="" disabled selected>Select your year level</option>
+                <option value="1">1st Year</option>
+                <option value="2">2nd Year</option>
+                <option value="3">3rd Year</option>
+                <option value="4">4th Year</option>
+                <option value="5">nth Year</option>
+            </select>
+            <h3 class="text-xl font-semibold text-gray-800">Academic Organization</h3>
+            <input id="editAcadOrg" type="text" name="editAcadOrg" placeholder="Current Academic Organization"
+                class="w-full px-4 py-2 border rounded focus:outline-none" />
+
+            <div class="mt-12 flex justify-end gap-2">
+                <button id="cancelEditProfileModalBtn"
+                    class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400">Cancel</button>
+                <button id="saveFlashcardBtn"
+                    class="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700">Save</button>
+            </div>
+        </form>
+    </div>
 </body>
 
 </html>

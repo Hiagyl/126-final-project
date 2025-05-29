@@ -14,7 +14,7 @@ $userID = $conn->real_escape_string($_SESSION['userID']);
 
 $sql = "SELECT set_id, name, description, owner_id, date_created
         FROM flashcard_sets
-        WHERE is_public = 1 AND owner_id != '$userID' 
+        WHERE is_public = 1 AND is_deleted = 0 AND owner_id != '$userID' 
         ORDER BY date_created DESC";
 
 $result = $conn->query($sql);

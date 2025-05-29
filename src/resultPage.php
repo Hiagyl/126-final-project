@@ -10,7 +10,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
-        // Make the session data available globally in JS
+
         window.sessionData = {
             setId: "<?php echo $_SESSION['current_set_id'] ?? ''; ?>"
         };
@@ -21,7 +21,6 @@ session_start();
 
 <body class="min-h-screen bg-gradient-to-r from-sky-100 to-indigo-100 flex flex-col items-center justify-center p-6">
 
-    <!-- Close Button -->
     <button onclick="goBack()"
         class="absolute top-4 right-6 text-3xl font-bold text-gray-500 hover:text-red-500 transition">&times;</button>
 

@@ -2,29 +2,26 @@
 session_start();
 require 'DBConnector.php';
 
-// Check if user is logged in
 if (!isset($_SESSION['userID'])) {
     echo "You must be logged in to delete a flashcard set.";
     exit();
 }
 
-// Get form values
 $userID = $_SESSION['userID'];
 $setID = $_POST['set_id'];
 
-// Delete from course_flashcard_sets (no owner_id check here)
-$sql1 = "DELETE FROM course_flashcard_sets WHERE set_id = $setID";
-$conn->query($sql1);
+// Always remove from course_flashcard_sets
+$conn->query("DELETE FROM course_flashcard_sets WHERE set_id = $setID");
 
-// Delete from flashcard_sets with owner check
-$sql2 = "DELETE FROM flashcard_sets WHERE set_id = $setID AND owner_id = $userID";
+// Check ownership
+$result = $conn->query("SELECT * FROM flashcard_sets WHERE set_id = $setID AND owner_id = $userID");
 
-if ($conn->query($sql2) === TRUE) {
-    header("Location: insideCourse.html");
-    exit();
-} else {
-    echo "Error: " . $conn->error;
+if ($result->num_rows > 0) {
+    // If the user is the owner, delete flashcards and mark set as deleted
+    $conn->query("DELETE FROM flashcards WHERE set_id = $setID");
+    $conn->query("UPDATE flashcard_sets SET is_deleted = 1 WHERE set_id = $setID");
 }
 
-$conn->close();
+header("Location: insideCourse.html");
+exit();
 ?>

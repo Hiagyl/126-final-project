@@ -52,13 +52,11 @@ session_start();
         </div>
     </div>
 
-    <!-- Submit Button -->
     <div class="mb-8">
         <button id="submitBtn"
             class="bg-indigo-600 text-white px-8 py-3 rounded-xl shadow-md transition hover:bg-indigo-700">Submit</button>
     </div>
 
-    <!-- Feedback -->
     <div id="feedback" class="text-xl font-medium text-center text-gray-700"></div>
 
     

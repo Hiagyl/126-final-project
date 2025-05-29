@@ -2,144 +2,199 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <title>StudySphere</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>StudySphere</title>
 </head>
 
-<body class="h-screen flex bg-gray-100">
-    <header class="w-64 bg-white shadow-md p-6 flex flex-col">
-        <img src="../assets/icons/logo.png" alt="StudySphere logo" />
+<body class="h-screen flex bg-gray-50">
+  <header class="w-64 bg-white shadow-md p-6 flex flex-col h-screen">
+    <img src="../assets/icons/logo.png" alt="StudySphere logo" class="mb-8" />
 
-        <nav class="flex flex-col h-screen">
-            <a href="homepage.html"
-                class="flex items-center gap-2 my-2 px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md">
-                <img src="../assets/icons/home.svg" alt="home icon" class="w-5 h-5" />
-                <span>Homepage</span>
-            </a>
+    <nav class="flex flex-col flex-grow overflow-auto">
+      <a href="homepage.html"
+        class="flex items-center gap-3 my-2 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-md transition duration-200">
+        <img src="../assets/icons/home.svg" alt="home icon" class="w-6 h-6" />
+        <span class="font-medium">Homepage</span>
+      </a>
 
-            <a href="explore.html"
-                class="flex items-center gap-2 my-2 px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md">
-                <img src="../assets/icons/explore.svg" alt="explore icon" class="w-5 h-5" />
-                <span>Explore Tests</span>
-            </a>
+      <a href="explore.html"
+        class="flex items-center gap-3 my-2 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-md transition duration-200">
+        <img src="../assets/icons/explore.svg" alt="explore icon" class="w-6 h-6" />
+        <span class="font-medium">Explore Tests</span>
+      </a>
 
-            <a href="leaderboard.html"
-                class="flex items-center gap-2 my-2 px-4 py-2 bg-indigo-100 text-indigo-700 font-semibold rounded-md">
-                <img src="../assets/icons/leaderboard.svg" alt="leaderboard icon" class="w-5 h-5" />
-                <span>Leaderboards</span>
-            </a>
+      <a href="leaderboard.html"
+        class="flex items-center gap-3 my-2 px-4 py-3 bg-indigo-100 text-indigo-700 font-semibold rounded-md cursor-default">
+        <img src="../assets/icons/leaderboard.svg" alt="leaderboard icon" class="w-6 h-6" />
+        <span>Leaderboards</span>
+      </a>
 
-            <hr class="my-2" />
+      <hr class="my-4 border-gray-300" />
 
-            <a href="myCourses.html"
-                class="flex items-center gap-2 my-2 px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md">
-                <img src="../assets/icons/course.svg" alt="course icon" class="w-5 h-5" />
-                <span>My Courses</span>
-            </a>
+      <a href="myCourses.html"
+        class="flex items-center gap-3 my-2 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-md transition duration-200">
+        <img src="../assets/icons/course.svg" alt="course icon" class="w-6 h-6" />
+        <span class="font-medium">My Courses</span>
+      </a>
 
-            <a href="profile.html"
-                class="flex items-center gap-2 my-2 px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md">
-                <img src="../assets/icons/profile.svg" alt="profile icon" class="w-5 h-5" />
-                <span>Profile</span>
-            </a>
-        </nav>
-    </header>
+      <a href="profile.html"
+        class="flex items-center gap-3 my-2 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-md transition duration-200">
+        <img src="../assets/icons/profile.svg" alt="profile icon" class="w-6 h-6" />
+        <span class="font-medium">Profile</span>
+      </a>
 
-    <main class="flex-1 p-6 z-10 overflow-auto">
-        <div class="flex justify-between items-start">
-            <h2 class="text-3xl font-semibold text-gray-800">Leaderboards</h2>
-            <div class="w-12 h-12 bg-gray-300 rounded-full"></div>
+      <hr class="my-2" />
+      <a href="logout.php"
+        class="flex items-center gap-2 mt-auto px-4 py-2 text-red-600 hover:bg-red-100 rounded-md cursor-pointer">
+        <img src="../assets/icons/logout.svg" alt="logout icon" class="w-5 h-5" />
+        <span>Logout</span>
+      </a>
+    </nav>
+  </header>
+
+  <main class="flex-1 p-8 overflow-auto">
+    <div class="flex justify-between items-center mb-8">
+      <h2 class="text-4xl font-bold text-gray-800">Leaderboards</h2>
+      <div
+        class="w-14 h-14 bg-gradient-to-tr from-indigo-400 to-indigo-600 rounded-full flex items-center justify-center shadow-lg text-white font-bold text-lg">
+        U
+      </div>
+    </div>
+
+    <!-- Leagues Section -->
+    <div class="mt-4 flex justify-center gap-10">
+      <!-- Make League 3 more prominent -->
+      <div class="flex flex-col items-center cursor-pointer group">
+        <div
+          class="w-20 h-20 bg-gray-400 rounded-full flex items-center justify-center group-hover:bg-indigo-600 transition-colors duration-300">
+          <span class="text-white text-2xl font-semibold">1</span>
         </div>
-
-        <!-- Leagues Section -->
-        <div class="mt-8 flex justify-center gap-12">
-            <div class="flex flex-col items-center">
-                <div class="w-24 h-24 bg-gray-400 rounded-full flex items-center justify-center">
-                    <span class="text-white text-2xl">1</span>
-                </div>
-                <span class="mt-2 text-sm text-gray-600">League 1</span>
-            </div>
-            <div class="flex flex-col items-center">
-                <div class="w-24 h-24 bg-gray-400 rounded-full flex items-center justify-center">
-                    <span class="text-white text-2xl">2</span>
-                </div>
-                <span class="mt-2 text-sm text-gray-600">League 2</span>
-            </div>
-            <div class="flex flex-col items-center">
-                <div class="w-36 h-36 bg-indigo-500 rounded-full flex items-center justify-center">
-                    <span class="text-white text-3xl font-semibold">3</span>
-                </div>
-                <span class="mt-2 text-sm text-gray-600">League 3</span>
-            </div>
-            <div class="flex flex-col items-center">
-                <div class="w-24 h-24 bg-gray-400 rounded-full flex items-center justify-center">
-                    <span class="text-white text-2xl">4</span>
-                </div>
-                <span class="mt-2 text-sm text-gray-600">League 4</span>
-            </div>
-            <div class="flex flex-col items-center">
-                <div class="w-24 h-24 bg-gray-400 rounded-full flex items-center justify-center">
-                    <span class="text-white text-2xl">5</span>
-                </div>
-                <span class="mt-2 text-sm text-gray-600">League 5</span>
-            </div>
+        <span class="mt-2 text-sm text-gray-600 group-hover:text-indigo-600 transition duration-300">League 1</span>
+      </div>
+      <div class="flex flex-col items-center cursor-pointer group">
+        <div
+          class="w-20 h-20 bg-gray-400 rounded-full flex items-center justify-center group-hover:bg-indigo-600 transition-colors duration-300">
+          <span class="text-white text-2xl font-semibold">2</span>
         </div>
-
-        <!-- Gold League Section -->
-        <div class="mt-6 text-center">
-            <h3 class="font-bold text-xl">Gold League</h3>
-            <p class="mt-2 text-gray-600">Be on top six to be promoted to the next league.</p>
-            <p class="mt-2 text-gray-600">Study to earn more EXP.</p>
-
-            <!-- Weekly / Overall Toggle -->
-            <div class="mt-6">
-                <button class="px-6 py-2 bg-indigo-500 text-white rounded-lg hover:bg-indigo-600 focus:outline-none"
-                    id="weeklyBtn">Weekly</button>
-                <button class="ml-4 px-6 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-indigo-600 focus:outline-none"
-                    id="overallBtn">Overall</button>
-            </div>
+        <span class="mt-2 text-sm text-gray-600 group-hover:text-indigo-600 transition duration-300">League 2</span>
+      </div>
+      <div class="flex flex-col items-center cursor-default">
+        <div
+          class="w-36 h-36 bg-indigo-500 rounded-full flex items-center justify-center shadow-lg transform scale-105">
+          <span class="text-white text-4xl font-extrabold">3</span>
         </div>
-
-        <!-- Leaderboard Content -->
-        <div id="weeklyLeaderboard" class="mt-6">
-            <h4 class="text-lg font-semibold mb-4">Weekly Leaderboard <span id="rank"></span></h4> <!--Get the rank-->
+        <span class="mt-3 text-lg font-semibold text-indigo-700">League 3</span>
+      </div>
+      <div class="flex flex-col items-center cursor-pointer group">
+        <div
+          class="w-20 h-20 bg-gray-400 rounded-full flex items-center justify-center group-hover:bg-indigo-600 transition-colors duration-300">
+          <span class="text-white text-2xl font-semibold">4</span>
         </div>
-        
-        <div id="overallLeaderboard" class="mt-6 hidden">
-            <h4 class="text-lg font-semibold mb-4">Overall Leaderboard</h4>
-        
+        <span class="mt-2 text-sm text-gray-600 group-hover:text-indigo-600 transition duration-300">League 4</span>
+      </div>
+      <div class="flex flex-col items-center cursor-pointer group">
+        <div
+          class="w-20 h-20 bg-gray-400 rounded-full flex items-center justify-center group-hover:bg-indigo-600 transition-colors duration-300">
+          <span class="text-white text-2xl font-semibold">5</span>
         </div>
+        <span class="mt-2 text-sm text-gray-600 group-hover:text-indigo-600 transition duration-300">League 5</span>
+      </div>
+    </div>
 
-    </main>
+    <!-- Gold League Section -->
+    <div class="mt-10 max-w-lg mx-auto text-center">
+      <h3 class="font-bold text-2xl text-indigo-700 mb-2">Gold League</h3>
+      <p class="text-gray-600">Be in the top six to be promoted to the next league.</p>
+      <p class="mt-1 text-gray-600">Study consistently to earn more EXP and rise higher.</p>
 
-    <script>
-        const weeklyBtn = document.getElementById('weeklyBtn');
-        const overallBtn = document.getElementById('overallBtn');
-        const weeklyLeaderboard = document.getElementById('weeklyLeaderboard');
-        const overallLeaderboard = document.getElementById('overallLeaderboard');
+      <!-- Weekly / Overall Toggle -->
+      <div class="mt-8 inline-flex rounded-lg bg-gray-200 p-1 shadow-sm" role="group" aria-label="Toggle Leaderboard">
+        <button
+          class="px-8 py-2 rounded-lg text-indigo-700 bg-white font-semibold shadow focus:outline-none transition"
+          id="weeklyBtn">Weekly</button>
+        <button
+          class="ml-2 px-8 py-2 rounded-lg text-gray-600 hover:text-indigo-700 focus:outline-none transition"
+          id="overallBtn">Overall</button>
+      </div>
+    </div>
 
-        weeklyBtn.addEventListener('click', () => {
-            weeklyBtn.classList.add('bg-indigo-500', 'text-white');
-            weeklyBtn.classList.remove('bg-gray-200', 'text-gray-700');
-            overallBtn.classList.add('bg-gray-200', 'text-gray-700');
-            overallBtn.classList.remove('bg-indigo-500', 'text-white');
+    <!-- Leaderboard Content -->
+    <div class="mt-8 max-w-3xl mx-auto space-y-4">
+      <div id="weeklyLeaderboard" class="space-y-3 max-h-96 overflow-y-auto">
+        <h4 class="text-xl font-semibold mb-4 text-indigo-700">Weekly Leaderboard <span id="rank"></span></h4>
+        <!-- Scores loaded here -->
+      </div>
 
-            weeklyLeaderboard.classList.remove('hidden');
-            overallLeaderboard.classList.add('hidden');
-        });
+      <div id="overallLeaderboard" class="space-y-3 max-h-96 overflow-y-auto hidden">
+        <h4 class="text-xl font-semibold mb-4 text-indigo-700">Overall Leaderboard</h4>
+        <!-- Scores loaded here -->
+      </div>
+    </div>
+  </main>
 
-        overallBtn.addEventListener('click', () => {
-            overallBtn.classList.add('bg-indigo-500', 'text-white');
-            overallBtn.classList.remove('bg-gray-200', 'text-gray-700');
-            weeklyBtn.classList.add('bg-gray-200', 'text-gray-700');
-            weeklyBtn.classList.remove('bg-indigo-500', 'text-white');
+  <script>
+    const weeklyBtn = document.getElementById('weeklyBtn');
+    const overallBtn = document.getElementById('overallBtn');
+    const weeklyLeaderboard = document.getElementById('weeklyLeaderboard');
+    const overallLeaderboard = document.getElementById('overallLeaderboard');
 
-            weeklyLeaderboard.classList.add('hidden');
-            overallLeaderboard.classList.remove('hidden');
-        });
-    </script>
+    weeklyBtn.addEventListener('click', () => {
+      weeklyBtn.classList.add('bg-white', 'text-indigo-700', 'shadow', 'font-semibold');
+      weeklyBtn.classList.remove('text-gray-600');
+      overallBtn.classList.remove('bg-white', 'text-indigo-700', 'shadow', 'font-semibold');
+      overallBtn.classList.add('text-gray-600');
+
+      weeklyLeaderboard.classList.remove('hidden');
+      overallLeaderboard.classList.add('hidden');
+    });
+
+    overallBtn.addEventListener('click', () => {
+      overallBtn.classList.add('bg-white', 'text-indigo-700', 'shadow', 'font-semibold');
+      overallBtn.classList.remove('text-gray-600');
+      weeklyBtn.classList.remove('bg-white', 'text-indigo-700', 'shadow', 'font-semibold');
+      weeklyBtn.classList.add('text-gray-600');
+
+      weeklyLeaderboard.classList.add('hidden');
+      overallLeaderboard.classList.remove('hidden');
+    });
+
+    function renderLeaderboard(data, containerId) {
+      const container = document.getElementById(containerId);
+      // Clear previous scores except the header
+      container.querySelectorAll('.score-entry').forEach(e => e.remove());
+
+      const rankList = data
+        .map(
+          (entry, index) => `
+        <div
+          class="score-entry flex justify-between items-center px-5 py-3 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 cursor-pointer">
+          <span class="font-semibold text-indigo-700">#${index + 1}</span>
+          <span class="text-gray-800 truncate max-w-xs">${entry.username}</span>
+          <span class="font-bold text-indigo-600">${entry.total_exp} EXP</span>
+        </div>
+      `
+        )
+        .join('');
+      container.insertAdjacentHTML('beforeend', rankList);
+    }
+
+    async function fetchLeaderboard(type) {
+      try {
+        const res = await fetch(`get_leaderboard.php?type=${type}`);
+        if (!res.ok) throw new Error('Network response was not ok');
+        const data = await res.json();
+        renderLeaderboard(data, type === 'weekly' ? 'weeklyLeaderboard' : 'overallLeaderboard');
+      } catch (error) {
+        console.error('Failed to fetch leaderboard:', error);
+      }
+    }
+
+    // Load weekly by default
+    fetchLeaderboard('weekly');
+    fetchLeaderboard('overall');
+  </script>
 </body>
 
 </html>

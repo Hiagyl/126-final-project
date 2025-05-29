@@ -16,11 +16,12 @@ if (!isset($_SESSION['current_course_id'])) {
 
 $courseID = $_SESSION['current_course_id'];
 
-// Basic query joining course_flashcard_sets and flashcard_sets
+// Revised SQL: Join course_flashcard_sets, flashcard_sets, and users (owners)
 $sql = "
-    SELECT fs.set_id, fs.name, fs.description, fs.is_public 
+    SELECT fs.set_id, fs.name, fs.description, fs.is_public, u.username AS owner_name
     FROM course_flashcard_sets cfs
     JOIN flashcard_sets fs ON cfs.set_id = fs.set_id
+    JOIN users u ON fs.owner_id = u.user_id
     WHERE cfs.course_id = $courseID
 ";
 

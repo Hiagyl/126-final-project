@@ -39,11 +39,15 @@ document.addEventListener("DOMContentLoaded", function () {
     fetch('get_flashcards.php')
         .then(response => response.json())
         .then(data => {
-            if (!Array.isArray(data)) {
+            if (data.error) {
+                throw new Error(data.error);
+            }
+
+            if (!Array.isArray(data.flashcards)) {
                 throw new Error("Invalid flashcard data.");
             }
 
-            flashcards = data;
+            flashcards = data.flashcards;
             setName.textContent = "My Flashcards";
             renderFlashcard();
         })
@@ -53,7 +57,6 @@ document.addEventListener("DOMContentLoaded", function () {
             answerText.textContent = "";
             counter.textContent = "0 / 0";
         });
-
 
     flashcard.addEventListener("click", () => {
         if (flashcards.length === 0) return;
@@ -76,6 +79,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     closeBtn.addEventListener("click", () => {
-        window.location.href = `coursePage.html?set_id=${setId}`; // Adjust if `courseId` is needed
+        window.location.href = `coursePage.html?set_id=${setId}`;
     });
 });

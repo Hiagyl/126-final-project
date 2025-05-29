@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Course Page</title>
+</head>
+
+<body class="h-screen flex bg-gray-100">
+    <!-- Sidebar -->
+    <header class="w-64 bg-white shadow-md p-6 flex flex-col h-screen">
+        <img src="../assets/icons/logo.png" alt="StudySphere logo" class="mb-8" />
+    
+        <nav class="flex flex-col flex-grow overflow-auto">
+            <a href="homepage.html"
+                class="flex items-center gap-3 my-2 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-md transition duration-200">
+                <img src="../assets/icons/home.svg" alt="home icon" class="w-6 h-6" />
+                <span class="font-medium">Homepage</span>
+            </a>
+    
+            <a href="explore.html"
+                class="flex items-center gap-3 my-2 px-4 py-3 bg-indigo-100 text-indigo-700 font-semibold rounded-md cursor-default">
+                <img src="../assets/icons/explore.svg" alt="explore icon" class="w-6 h-6" />
+                <span class="font-medium">Explore Tests</span>
+            </a>
+    
+            <a href="leaderboard.html"
+                class="flex items-center gap-3 my-2 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-md transition duration-200">
+                <img src="../assets/icons/leaderboard.svg" alt="leaderboard icon" class="w-6 h-6" />
+                <span class="font-medium">Leaderboards</span>
+            </a>
+    
+            <hr class="my-4 border-gray-300" />
+    
+            <a href="myCourses.html"
+                class="flex items-center gap-3 my-2 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-md transition duration-200">
+                <img src="../assets/icons/course.svg" alt="course icon" class="w-6 h-6" />
+                <span class="font-medium">My Courses</span>
+            </a>
+    
+            <a href="profile.html"
+                class="flex items-center gap-3 my-2 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-md transition duration-200">
+                <img src="../assets/icons/profile.svg" alt="profile icon" class="w-6 h-6" />
+                <span class="font-medium">Profile</span>
+            </a>
+    
+            <hr class="my-2" />
+            <a href="logout.php"
+                class="flex items-center gap-2 mt-auto px-4 py-2 text-red-600 hover:bg-red-100 rounded-md cursor-pointer">
+                <img src="../assets/icons/logout.svg" alt="logout icon" class="w-5 h-5" />
+                <span>Logout</span>
+            </a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-1 p-6">
+        <button id="backBtn" class="flex items-center gap-2 text-indigo-600 hover:text-indigo-800 mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+            Back to Explore Page
+        </button>
+
+        <div class="flex items-center justify-between mb-2">
+            <div id="courseTitle" class="text-3xl font-semibold text-gray-800">Loading...</div>
+        </div>
+
+        <hr class="mb-6 border-gray-300" />
+
+        <div id="flashcardContainer" class="mt-4 flex flex-col gap-4"></div>
+
+        <button id="openFlashcardModalBtn" class="bg-indigo-600 text-white px-4 py-2 rounded-full mt-6 w-full">Save
+            Flashcard Set</button>
+    </main>
+
+    <!-- Save Flashcard Set Modal -->
+    <div id="flashcardModalBackdrop" class="fixed inset-0 bg-black/50 hidden flex justify-center items-center z-30">
+        <form method="POST" action="save_set.php" class="bg-white rounded-lg shadow-xl w-full max-w-md relative p-6">
+            <button id="closeFlashcardModalBtn"
+                class="absolute top-2 right-3 text-gray-500 hover:text-gray-700 text-xl">&times;</button>
+
+            <h2 class="text-2xl font-semibold mb-4">Save Flashcard Set</h2>
+
+            <label for="courseSelect" class="block mb-2 text-gray-700">Choose Course Folder</label>
+            <select id="courseSelect" name="course_id" class="w-full px-4 py-2 border rounded mb-4 focus:outline-none"
+                required>
+                <option value="" disabled selected>Select a course...</option>
+            </select>
+
+            <!-- Hidden input to carry set_id -->
+            <input type="hidden" id="setIdInput" name="set_id" />
+
+            <div class="mt-6 flex justify-end gap-2">
+                <button type="button" id="cancelFlashcardModalBtn"
+                    class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400">Cancel</button>
+                <button type="submit"
+                    class="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700">Save</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Script Section -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const courseSelect = document.getElementById("courseSelect");
+            const modal = document.getElementById("flashcardModalBackdrop");
+            const openBtn = document.getElementById("openFlashcardModalBtn");
+            const closeBtn = document.getElementById("closeFlashcardModalBtn");
+            const cancelBtn = document.getElementById("cancelFlashcardModalBtn");
+            const flashcardContainer = document.getElementById("flashcardContainer");
+            const backBtn = document.getElementById("backBtn");
+            const setIdInput = document.getElementById("setIdInput");
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const setID = urlParams.get("set_id");
+
+            if (setID) {
+                setIdInput.value = setID;
+
+                fetch("set_current_fset.php", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                    body: "set_id=" + encodeURIComponent(setID)
+                });
+            }
+
+            // Populate course dropdown
+            fetch("get_courses.php")
+                .then(res => res.json())
+                .then(data => {
+                    if (Array.isArray(data)) {
+                        data.forEach(course => {
+                            const option = document.createElement("option");
+                            option.value = course.course_id;
+                            option.textContent = course.course_name;
+                            courseSelect.appendChild(option);
+                        });
+                    } else {
+                        alert("Failed to load courses");
+                    }
+                })
+                .catch(err => console.error("Course fetch error:", err));
+
+            // Fetch and display flashcards
+            fetch("get_flashcards.php")
+                .then(res => res.json())
+                .then(data => {
+                    flashcardContainer.innerHTML = "";
+
+                    if (data.error) {
+                        flashcardContainer.innerHTML = `<p class="text-red-500">${data.error}</p>`;
+                        return;
+                    }
+
+                    const flashcards = data.flashcards;
+                    // const isOwner = data.is_owner;
+
+                    if (!Array.isArray(flashcards) || flashcards.length == 0) {
+                        flashcardContainer.innerHTML = `<p class="text-red-500">No flashcards found.</p>`;
+                        return;
+                    }
+
+                    flashcards.forEach(card => {
+                        const cardEl = document.createElement("div");
+                        cardEl.className = "bg-white shadow-md rounded-lg p-4 mb-4";
+
+                        cardEl.innerHTML = `
+              <p class="text-lg font-semibold">Q: ${card.question}</p>
+              <p class="text-gray-600 mt-2">A: ${card.answer}</p>
+            `;
+
+                        flashcardContainer.appendChild(cardEl);
+                    });
+                })
+                .catch(err => {
+                    console.error("Error loading flashcards:", err);
+                    flashcardContainer.innerHTML = `<p class="text-red-500">Failed to load flashcards.</p>`;
+                });
+
+            // Modal behavior
+            openBtn.addEventListener("click", () => modal.classList.remove("hidden"));
+            closeBtn.addEventListener("click", () => modal.classList.add("hidden"));
+            cancelBtn.addEventListener("click", () => modal.classList.add("hidden"));
+            modal.addEventListener("click", e => {
+                if (e.target === modal) modal.classList.add("hidden");
+            });
+
+            backBtn.addEventListener("click", () => window.location.href = "explore.html");
+        });
+    </script>
+</body>
+
+</html>

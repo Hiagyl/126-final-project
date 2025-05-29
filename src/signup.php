@@ -12,8 +12,7 @@
     <!-- Left side: Logo placeholder -->
     <div class="hidden md:flex w-1/2 bg-green-600 items-center justify-center">
       <div class="text-white text-4xl font-bold">
-        LOGO<br/>
-        PLACEHOLDER
+        StudySphere
       </div>
     </div>
 
