@@ -11,7 +11,7 @@ $check = "SELECT * FROM users WHERE username = '$username'";
 $result = $conn->query($check);
 
 if ($result->num_rows > 0) {
-    echo "Username already exists. Please choose another.";
+    header("Location: signup.php?alert=error&msg=User+already+exists.+Please+change+the+username.");
 } else {
     // Insert user into database
     $sql = "INSERT INTO users (username, password) VALUES ('$username', '$password')";

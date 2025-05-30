@@ -7,6 +7,13 @@
 </head>
 <body class="min-h-screen flex items-center justify-center bg-gray-100">
 
+<div id="alertModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+        <div id="alertContent"
+            class="bg-white px-6 py-4 rounded-lg shadow-lg text-sm font-medium text-center max-w-sm w-full border">
+            <!-- Alert message will be injected here -->
+        </div>
+    </div>
+
   <div class="flex max-w-4xl bg-white shadow-lg rounded-lg overflow-hidden">
 
     <!-- Left side: Logo placeholder -->
@@ -48,6 +55,28 @@
     </div>
 
   </div>
+ <script>const alertModal = document.getElementById("alertModal");
+    const alertContent = document.getElementById("alertContent");
+    const urlParams = new URLSearchParams(window.location.search);
+    const alertType = urlParams.get('alert');
+    const alertMsg = urlParams.get('msg');
 
+    if (alertType && alertMsg) {
+        const decodedMsg = decodeURIComponent(alertMsg);
+        alertContent.textContent = decodedMsg;
+
+        if (alertType === 'success') {
+            alertContent.classList.add("bg-green-100", "text-green-800", "border-green-300");
+        } else {
+            alertContent.classList.add("bg-red-100", "text-red-800", "border-red-300");
+        }
+
+        alertModal.classList.remove("hidden");
+
+        setTimeout(() => {
+            alertModal.classList.add("hidden");
+            alertContent.className = "bg-white px-6 py-4 rounded-lg shadow-lg text-sm font-medium text-center max-w-sm w-full border";
+        }, 3000);
+    }</script>
 </body>
 </html>
